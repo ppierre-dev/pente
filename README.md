@@ -1,2 +1,2 @@
 # Pente
-Jeu de pente pour le module M2204
+Super jeu de pente pour le module M2204
