@@ -10,7 +10,6 @@ import java.awt.*;
 public class InterfaceGraphique extends JFrame{
 
     private Canvas canvas;
-    private CadreInformation cadreInformation1;
     
     /**
      * Constructeur
@@ -27,15 +26,6 @@ public class InterfaceGraphique extends JFrame{
 
         this.setCanvas(canvas);
         this.add(this.getCanvas());
-
-        CadreInformation cadreInformation1 = new CadreInformation();
-        cadreInformation1.setLocation(780, 30);
-        //this.getContentPane().add(cadreInformation1);
-        this.setContentPane(cadreInformation1);
-
-        CadreInformation cadreInformation2 = new CadreInformation();
-        cadreInformation2.setLocation(780, 400);
-        this.add(cadreInformation2);
 
         BordureInterface bordure1 = new BordureInterface();
         bordure1.setSize(1, 690);

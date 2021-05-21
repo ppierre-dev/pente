@@ -1,6 +1,6 @@
 /**
  * Classe Jeu
- * Classe principale de gestion du jeu 
+ * Classe principale de gestion du jeu
  */
 public abstract class Jeu {
     private static InterfaceGraphique interfaceGraphique = new InterfaceGraphique();
