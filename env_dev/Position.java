@@ -1,5 +1,3 @@
-package fr.groupe1tpd;
-
 /**
  * Classe Position
  * Représente une position quelconque sur le

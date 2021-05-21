@@ -1,16 +1,16 @@
-package fr.groupe1tpd;
-
 import java.util.ArrayList;
 
 public class Joueur {
     
     private ArrayList<Pion> pions;
+    private Couleur couleur;
 
     /**
      * Constructeur par défaut
      */
-    public Joueur(){
-        this.pions = new ArrayList<Pion>();
+    public Joueur(Couleur couleur){
+        this.setPions(new ArrayList<Pion>());
+        this.setCouleur(couleur);
     }
 
     /**
@@ -34,6 +34,22 @@ public class Joueur {
      */
     public void setPions(ArrayList<Pion> pions){
         this.pions = pions;
+    }
+
+    /**
+     * Obtenir la couleur du joueur
+     * @return
+     */
+    public Couleur getCouleur(){
+        return this.couleur;
+    }
+
+    /**
+     * Définir en interne la couleur du joueur
+     * @param couleur Une couleur
+     */
+    private void setCouleur(Couleur couleur){
+        this.couleur = couleur;
     }
 
 }
