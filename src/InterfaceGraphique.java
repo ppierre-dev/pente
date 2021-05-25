@@ -62,6 +62,7 @@ public class InterfaceGraphique extends JFrame{
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
+        this.setAlwaysOnTop(true);
     }
 
     public CadreInformation getCadreInformationBlanc() {

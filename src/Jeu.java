@@ -89,6 +89,21 @@ public abstract class Jeu {
     public static void afficherInformations(){
         Jeu.interfaceGraphique.getCadreInformationBlanc().setNom(Jeu.joueurBlanc.getNom());
         Jeu.interfaceGraphique.getCadreInformationNoir().setNom(Jeu.joueurNoir.getNom());
+
+        Jeu.interfaceGraphique.getCadreInformationBlanc().setCouleur(Couleur.BLANC);
+        Jeu.interfaceGraphique.getCadreInformationNoir().setCouleur(Couleur.NOIR);
+
+        if(Jeu.tourJoueur.equals(Couleur.BLANC)){
+            Jeu.interfaceGraphique.getCadreInformationBlanc().getLabelJouerJoueur().setVisible(true);
+            Jeu.interfaceGraphique.getCadreInformationNoir().getLabelJouerJoueur().setVisible(false);
+        }
+        else{
+            Jeu.interfaceGraphique.getCadreInformationBlanc().getLabelJouerJoueur().setVisible(false);
+            Jeu.interfaceGraphique.getCadreInformationNoir().getLabelJouerJoueur().setVisible(true);
+        }
+
+        Jeu.interfaceGraphique.getCadreInformationBlanc().setPions(String.valueOf(Joueur.MAX_PIONS - joueurBlanc.getNombrePions()));
+        Jeu.interfaceGraphique.getCadreInformationNoir().setPions(String.valueOf(Joueur.MAX_PIONS - joueurNoir.getNombrePions()));
     }
 
     public static Joueur getJoueurBlanc() {

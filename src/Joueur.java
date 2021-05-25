@@ -3,6 +3,8 @@ import java.util.UUID;
 
 public class Joueur {
     
+    public static int MAX_PIONS = 60;
+
     private ArrayList<Pion> pions;
     private Couleur couleur;
     private String nom;
@@ -53,6 +55,12 @@ public class Joueur {
      */
     public void setPions(ArrayList<Pion> pions){
         this.pions = pions;
+    }
+
+    public void ajouterPion(Pion pion){
+        if(this.getNombrePions() < 60){
+            this.getPions().add(pion);
+        }
     }
 
     /**
