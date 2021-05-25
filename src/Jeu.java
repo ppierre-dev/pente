@@ -1,15 +1,24 @@
+import java.util.Scanner;
+
 /**
  * Classe Jeu
  * Classe principale de gestion du jeu
  */
 public abstract class Jeu {
-    private static InterfaceGraphique interfaceGraphique = new InterfaceGraphique();
+    private static InterfaceGraphique interfaceGraphique;
     private static Plateau plateau = new Plateau();
     private static Couleur tourJoueur = Couleur.NOIR;
     private static Joueur joueurBlanc = new Joueur(Couleur.BLANC);
     private static Joueur joueurNoir = new Joueur(Couleur.NOIR);
     private static AvantDernierCoup avantDernierCoup;
     public static void main(String[] args){ 
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Saissisez le nom du joueur 1 (Blanc) : ");
+        joueurBlanc.setNom(scanner.nextLine());
+        System.out.println("Saissisez le nom du joueur 2 (Noir) : ");
+        joueurNoir.setNom(scanner.nextLine());
+
         double random = Math.random();
         if(random < 0.5){
             Jeu.setTourJoueur(Couleur.BLANC);
@@ -17,6 +26,8 @@ public abstract class Jeu {
         else{
             Jeu.setTourJoueur(Couleur.NOIR);
         }
+        Jeu.interfaceGraphique = new InterfaceGraphique();
+        Jeu.afficherInformations();
     }
 
     /**
@@ -70,5 +81,29 @@ public abstract class Jeu {
         else{
             Jeu.setTourJoueur(Couleur.BLANC);
         }
+    }
+
+    /**
+     * Gère les affichages textuels du jeu
+     */
+    public static void afficherInformations(){
+        Jeu.interfaceGraphique.getCadreInformationBlanc().setNom(Jeu.joueurBlanc.getNom());
+        Jeu.interfaceGraphique.getCadreInformationNoir().setNom(Jeu.joueurNoir.getNom());
+    }
+
+    public static Joueur getJoueurBlanc() {
+        return joueurBlanc;
+    }
+
+    public static void setJoueurBlanc(Joueur joueurBlanc) {
+        Jeu.joueurBlanc = joueurBlanc;
+    }
+
+    public static Joueur getJoueurNoir() {
+        return joueurNoir;
+    }
+
+    public static void setJoueurNoir(Joueur joueurNoir) {
+        Jeu.joueurNoir = joueurNoir;
     }
 }
