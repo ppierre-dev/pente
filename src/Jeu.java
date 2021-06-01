@@ -94,7 +94,7 @@ public abstract class Jeu {
      */
     public static void afficherInformations(){
         Jeu.interfaceGraphique.getCadreInformationBlanc().setNom(Jeu.joueurs.get(Couleur.BLANC).getNom());
-        Jeu.interfaceGraphique.getCadreInformationNoir().setNom(Jeu.joueurs.get(Couleur.BLANC).getNom());
+        Jeu.interfaceGraphique.getCadreInformationNoir().setNom(Jeu.joueurs.get(Couleur.NOIR).getNom());
 
         Jeu.interfaceGraphique.getCadreInformationBlanc().setCouleur(Couleur.BLANC);
         Jeu.interfaceGraphique.getCadreInformationNoir().setCouleur(Couleur.NOIR);
