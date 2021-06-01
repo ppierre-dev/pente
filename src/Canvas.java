@@ -1,11 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 /**
  * Classe Canvas
  * Gère le dessin graphique du jeu
  */
-public class Canvas extends JPanel{
+public class Canvas extends JPanel implements MouseListener{
 
     private static int DIMENSION_CASE = 30;
     private static int DIMENSION_INTERSECTION = 6;
@@ -16,6 +19,7 @@ public class Canvas extends JPanel{
     public Canvas(){
         this.setSize(684, 684);
         this.repaint();
+        this.addMouseListener(this);
     }
 
     /**
@@ -69,8 +73,47 @@ public class Canvas extends JPanel{
                         image = GestionnaireImages.getImage("PionNoir");
                     break;
                 }
+
+                int x = pion.getPosition().getX();
+                int y = pion.getPosition().getY();
+                g2d.drawImage(image, (x * Canvas.DIMENSION_CASE) + (x * Canvas.DIMENSION_INTERSECTION), (y * Canvas.DIMENSION_CASE) + (y * Canvas.DIMENSION_INTERSECTION), this);
             }
 
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        //
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        
+        Position position = new Position(
+            e.getX() / (Canvas.DIMENSION_CASE + Canvas.DIMENSION_INTERSECTION),
+            e.getY() / (Canvas.DIMENSION_CASE + Canvas.DIMENSION_INTERSECTION)
+        );
+        Jeu.poserPion(position);
+        this.repaint();
+        
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
     }
 }

@@ -25,6 +25,8 @@ public abstract class Jeu {
         joueurs.put(Couleur.NOIR, new Joueur(Couleur.NOIR));
         joueurs.get(Couleur.NOIR).setNom(scanner.nextLine());
 
+        joueurs.get(Couleur.BLANC).ajouterPion(new Pion(Couleur.BLANC, new Position(3, 2)));
+
         double random = Math.random();
         if(random < 0.5){
             Jeu.setTourJoueur(Couleur.BLANC);
@@ -68,11 +70,16 @@ public abstract class Jeu {
         Jeu.tourJoueur = tourJoueur;
     }
 
+    public static void poserPion(Position position){
+        Jeu.getJoueur(Jeu.getTourJoueur()).ajouterPion(new Pion(Jeu.getTourJoueur(), position));
+        Jeu.mettreAJour();
+    }
+
     /**
      * Effectue le coup du joueur sur le plateau
      * et passe au joueur suivant
      */
-    public static void jouerCoup(){
+    public static void mettreAJour(){
         /*
             Traitement du plateau
             à venir
@@ -87,6 +94,7 @@ public abstract class Jeu {
         else{
             Jeu.setTourJoueur(Couleur.BLANC);
         }
+        Jeu.afficherInformations();
     }
 
     /**

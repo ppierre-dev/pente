@@ -6,6 +6,11 @@ public class Pion {
     private Position position;
     private Couleur couleur;
 
+    public Pion(Couleur couleur, Position position){
+        this.setCouleur(couleur);
+        this.setPosition(position);
+    }
+
     /**
      * Obtenir la position du pion
      */
