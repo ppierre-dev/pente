@@ -32,12 +32,12 @@ public class Position {
 
     /**
      * Définir la position en abscisse
-     * Si la coordonnée n'est pas incluse dans [0, 19],
+     * Si la coordonnée n'est pas incluse dans [0, 18],
      * elle prend la valeur 0 par défaut
-     * @param x Un entier inclu dans [0, 19]
+     * @param x Un entier inclu dans [0, 18]
      */
     public void setX(int x) {
-        if(x >= 0 && x <= 19){
+        if(x >= 0 && x <= 18){
             this.x = x;
         }
         else{
@@ -55,9 +55,9 @@ public class Position {
 
     /**
      * Définir la position en ordonnée
-     * Si la coordonnée n'est pas incluse dans [0, 19],
+     * Si la coordonnée n'est pas incluse dans [0, 18],
      * elle prend la valeur 0 par défaut
-     * @param y Un entier inclu dans [0, 19]
+     * @param y Un entier inclu dans [0, 18]
      */
     public void setY(int y) {
         if(y >= 0 && y <= 19){

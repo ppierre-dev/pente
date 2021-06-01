@@ -3,37 +3,38 @@
  * Représente un plateau de jeu
  */
 public class Plateau{
-    private Pion[][] cases;
+    public static int DIMENSION = 19;
+    private Pion[][] intersections;
 
     /**
      * Constructeur par défaut
-     * Initialise le tableau de cases
+     * Initialise le tableau de intersections
      * par des valeurs null indiquant
      * l'absence de pions
      */
     public Plateau(){
-        Pion[][] cases_ = new Pion[20][20];
-        for(int x=0; x<20; x++){
-            for(int y=0; y<20; y++){
-                cases_[x][y] = null;
+        Pion[][] intersections_ = new Pion[Plateau.DIMENSION][Plateau.DIMENSION];
+        for(int x=0; x<Plateau.DIMENSION; x++){
+            for(int y=0; y<Plateau.DIMENSION; y++){
+                intersections_[x][y] = null;
             }
         }
-        this.setCases(cases_);
+        this.setIntersections(intersections_);
     }
 
     /**
-     * Obtenir les cases du plateau
+     * Obtenir les intersections du plateau
      * @return
      */
-    public Pion[][] getCases(){
-        return this.cases;
+    public Pion[][] getIntersections(){
+        return this.intersections;
     }
 
     /**
-     * Définir les cases du plateau
-     * @param cases
+     * Définir les intersections du plateau
+     * @param intersections
      */
-    public void setCases(Pion[][] cases){
-        this.cases = cases;
+    public void setIntersections(Pion[][] intersections){
+        this.intersections = intersections;
     }
 }

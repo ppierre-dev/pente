@@ -24,7 +24,6 @@ public class InterfaceGraphique extends JFrame{
 
         Canvas canvas = new Canvas();
         this.setCanvas(canvas);
-        this.getCanvas().setSize(690, 690);
         this.getCanvas().setLocation(30, 30);
         this.add(this.getCanvas());
 

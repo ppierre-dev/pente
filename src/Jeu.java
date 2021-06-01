@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -8,16 +9,21 @@ public abstract class Jeu {
     private static InterfaceGraphique interfaceGraphique;
     private static Plateau plateau = new Plateau();
     private static Couleur tourJoueur = Couleur.NOIR;
-    private static Joueur joueurBlanc = new Joueur(Couleur.BLANC);
-    private static Joueur joueurNoir = new Joueur(Couleur.NOIR);
+    private static HashMap<Couleur, Joueur> joueurs = new HashMap<Couleur, Joueur>();
     private static AvantDernierCoup avantDernierCoup;
-    public static void main(String[] args){ 
+    public static void main(String[] args){
+
+        GestionnaireImages.setImage("PionBlanc", "../images/PionBlanc.png");
+        GestionnaireImages.setImage("PionNoir", "../images/PionNoir.png");
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Saissisez le nom du joueur 1 (Blanc) : ");
-        joueurBlanc.setNom(scanner.nextLine());
+        joueurs.put(Couleur.BLANC, new Joueur(Couleur.BLANC));
+        joueurs.get(Couleur.BLANC).setNom(scanner.nextLine());
+        
         System.out.println("Saissisez le nom du joueur 2 (Noir) : ");
-        joueurNoir.setNom(scanner.nextLine());
+        joueurs.put(Couleur.NOIR, new Joueur(Couleur.NOIR));
+        joueurs.get(Couleur.NOIR).setNom(scanner.nextLine());
 
         double random = Math.random();
         if(random < 0.5){
@@ -87,8 +93,8 @@ public abstract class Jeu {
      * Gère les affichages textuels du jeu
      */
     public static void afficherInformations(){
-        Jeu.interfaceGraphique.getCadreInformationBlanc().setNom(Jeu.joueurBlanc.getNom());
-        Jeu.interfaceGraphique.getCadreInformationNoir().setNom(Jeu.joueurNoir.getNom());
+        Jeu.interfaceGraphique.getCadreInformationBlanc().setNom(Jeu.joueurs.get(Couleur.BLANC).getNom());
+        Jeu.interfaceGraphique.getCadreInformationNoir().setNom(Jeu.joueurs.get(Couleur.BLANC).getNom());
 
         Jeu.interfaceGraphique.getCadreInformationBlanc().setCouleur(Couleur.BLANC);
         Jeu.interfaceGraphique.getCadreInformationNoir().setCouleur(Couleur.NOIR);
@@ -102,23 +108,27 @@ public abstract class Jeu {
             Jeu.interfaceGraphique.getCadreInformationNoir().getLabelJouerJoueur().setVisible(true);
         }
 
-        Jeu.interfaceGraphique.getCadreInformationBlanc().setPions(String.valueOf(Joueur.MAX_PIONS - joueurBlanc.getNombrePions()));
-        Jeu.interfaceGraphique.getCadreInformationNoir().setPions(String.valueOf(Joueur.MAX_PIONS - joueurNoir.getNombrePions()));
+        Jeu.interfaceGraphique.getCadreInformationBlanc().setPions(String.valueOf(Joueur.MAX_PIONS - Jeu.joueurs.get(Couleur.BLANC).getNombrePions()));
+        Jeu.interfaceGraphique.getCadreInformationNoir().setPions(String.valueOf(Joueur.MAX_PIONS - Jeu.joueurs.get(Couleur.BLANC).getNombrePions()));
     }
 
-    public static Joueur getJoueurBlanc() {
-        return joueurBlanc;
+    public static Joueur getJoueur(Couleur couleur) {
+        if(Jeu.joueurs.containsKey(couleur)){
+            return Jeu.joueurs.get(couleur);
+        }
+        else{
+            return null;
+        }
     }
 
-    public static void setJoueurBlanc(Joueur joueurBlanc) {
-        Jeu.joueurBlanc = joueurBlanc;
+    public static void setJoueur(Couleur couleur, Joueur joueur) {
+        if(Jeu.joueurs.containsKey(couleur)){
+            Jeu.joueurs.remove(couleur);
+        }
+        Jeu.joueurs.put(couleur, joueur);
     }
 
-    public static Joueur getJoueurNoir() {
-        return joueurNoir;
-    }
-
-    public static void setJoueurNoir(Joueur joueurNoir) {
-        Jeu.joueurNoir = joueurNoir;
+    public static HashMap<Couleur, Joueur> getJoueurs(){
+        return Jeu.joueurs;
     }
 }
