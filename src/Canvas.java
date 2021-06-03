@@ -62,21 +62,28 @@ public class Canvas extends JPanel implements MouseListener{
             /*
                 Pour chacun de ses pions
             */
-            for(Pion pion : Jeu.getJoueur(couleur).getPions()){
-                BufferedImage image = null;
-                switch(couleur){
-                    case BLANC:
-                        image = GestionnaireImages.getImage("PionBlanc");
-                    break;
+            for(int x=0; x<Plateau.DIMENSION; x++){
+                for(int y=0; y<Plateau.DIMENSION; y++){
 
-                    case NOIR:
-                        image = GestionnaireImages.getImage("PionNoir");
-                    break;
+                    if(Jeu.getPlateau().estLibre(new Position(x, y))){
+                        continue;
+                    }
+
+                    BufferedImage image = null;
+                    switch(Jeu.getPlateau().){
+                        case BLANC:
+                            image = GestionnaireImages.getImage("PionBlanc");
+                        break;
+
+                        case NOIR:
+                            image = GestionnaireImages.getImage("PionNoir");
+                        break;
+                    }
+
+                    int x = pion.getPosition().getX();
+                    int y = pion.getPosition().getY();
+                    g2d.drawImage(image, (x * Canvas.DIMENSION_CASE) + (x * Canvas.DIMENSION_INTERSECTION), (y * Canvas.DIMENSION_CASE) + (y * Canvas.DIMENSION_INTERSECTION), this);
                 }
-
-                int x = pion.getPosition().getX();
-                int y = pion.getPosition().getY();
-                g2d.drawImage(image, (x * Canvas.DIMENSION_CASE) + (x * Canvas.DIMENSION_INTERSECTION), (y * Canvas.DIMENSION_CASE) + (y * Canvas.DIMENSION_INTERSECTION), this);
             }
 
         }

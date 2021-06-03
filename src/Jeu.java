@@ -25,7 +25,7 @@ public abstract class Jeu {
         joueurs.put(Couleur.NOIR, new Joueur(Couleur.NOIR));
         joueurs.get(Couleur.NOIR).setNom(scanner.nextLine());
 
-        joueurs.get(Couleur.BLANC).ajouterPion(new Pion(Couleur.BLANC, new Position(3, 2)));
+        Jeu.getPlateau().ajouterPion(new Pion(Couleur.BLANC, new Position(3, 2)));
 
         double random = Math.random();
         if(random < 0.5){
@@ -71,7 +71,13 @@ public abstract class Jeu {
     }
 
     public static void poserPion(Position position){
-        Jeu.getJoueur(Jeu.getTourJoueur()).ajouterPion(new Pion(Jeu.getTourJoueur(), position));
+        Joueur joueur = Jeu.getJoueur(Jeu.getTourJoueur());
+        if(joueur.getNombrePions() <= Joueur.MAX_PIONS){
+            if(Jeu.getPlateau().estLibre(position)){
+                Jeu.getPlateau().ajouterPion(new Pion(joueur.getCouleur(), position));
+            }
+        }
+        
         Jeu.mettreAJour();
     }
 

@@ -13,7 +13,6 @@ public class Joueur {
      * Constructeur par défaut
      */
     public Joueur(Couleur couleur){
-        this.setPions(new ArrayList<Pion>());
         this.setCouleur(couleur);
         this.setNom(this.getCouleur().toString());
     }
@@ -35,32 +34,11 @@ public class Joueur {
     }
 
     /**
-     * Obtenir la liste des pions du joueur
-     */
-    public ArrayList<Pion> getPions(){
-        return this.pions;
-    }
-
-    /**
      * Obtenir le nombre de pions du joueur
      * @return
      */
     public int getNombrePions(){
-        return this.pions.size();
-    }
-
-    /**
-     * Définir la liste des pions du joueur
-     * @param pions
-     */
-    public void setPions(ArrayList<Pion> pions){
-        this.pions = pions;
-    }
-
-    public void ajouterPion(Pion pion){
-        if(this.getNombrePions() < 60){
-            this.getPions().add(pion);
-        }
+        return Jeu.getPlateau().getNombrePionsCouleur(this.getCouleur());
     }
 
     /**
