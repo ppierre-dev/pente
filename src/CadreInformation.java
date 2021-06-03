@@ -54,7 +54,7 @@ public class CadreInformation extends JPanel{
         this.add(this.getLabelJouerJoueur());
         this.getLabelJouerJoueur().setSize(500, 50);
         this.getLabelJouerJoueur().setLocation(0, 280);
-        this.getLabelJouerJoueur().setText("C'est à vous de jouer !");
+        this.getLabelJouerJoueur().setText("C'est " + "\u00e0" + " vous de jouer !");
         this.getLabelJouerJoueur().validate();
         this.getLabelJouerJoueur().repaint();
         this.getLabelJouerJoueur().setFont(new Font("Yu Gothic", Font.BOLD, 18));

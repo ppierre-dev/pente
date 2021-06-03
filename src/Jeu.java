@@ -123,7 +123,7 @@ public abstract class Jeu {
         }
 
         Jeu.interfaceGraphique.getCadreInformationBlanc().setPions(String.valueOf(Joueur.MAX_PIONS - Jeu.joueurs.get(Couleur.BLANC).getNombrePions()));
-        Jeu.interfaceGraphique.getCadreInformationNoir().setPions(String.valueOf(Joueur.MAX_PIONS - Jeu.joueurs.get(Couleur.BLANC).getNombrePions()));
+        Jeu.interfaceGraphique.getCadreInformationNoir().setPions(String.valueOf(Joueur.MAX_PIONS - Jeu.joueurs.get(Couleur.NOIR).getNombrePions()));
     }
 
     public static Joueur getJoueur(Couleur couleur) {
