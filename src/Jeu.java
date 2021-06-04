@@ -146,8 +146,8 @@ public class Jeu implements Ecouteur{
         */
 
         for(Couleur couleur : Couleur.values()){
-            Plateau plateau = Jeu.getInstancePrincipale().getPlateau();
-            if(!plateau.getIntersection(position).equals(couleur)){
+            Plateau plateau = this.getPlateau();
+            if(plateau.estLibre(position) || !plateau.getIntersection(position).equals(couleur)){
                 /* Ce n'est pas cette couleur là qui a joué le coup */
                 continue;
             }
@@ -157,10 +157,81 @@ public class Jeu implements Ecouteur{
                 la bonne couleur
             */        
 
-            for(int x = position.getX() - 3; x <= position.getX() + 3; x++){
-                
+            int pierres = 0;
+
+            /* 
+                Test alignement horizontal
+            */
+            pierres = 0;
+            /*
+                gauche
+            */  
+            for(int x = position.getX() - 1; x >= position.getX() - 4; x--){
+                Position pos = new Position(x, position.getY());
+                if(!plateau.estLibre(pos) && plateau.getIntersection(pos).equals(couleur)){
+                    pierres++;
+                }
+                else{
+                    break;
+                }
             }
 
+            /* 
+                droite
+            */
+            for(int x = position.getX() + 1; x <= position.getX() + 4; x++){
+                Position pos = new Position(x, position.getY());
+                if(!plateau.estLibre(pos) && plateau.getIntersection(pos).equals(couleur)){
+                    pierres++;
+                }
+                else{
+                    break;
+                }
+            }
+
+
+
+            if(pierres >= 4){
+                this.terminerPartie();
+            }
+
+
+
+            /* 
+                Test alignement vertical
+            */
+            pierres = 0;
+            /*
+                haut
+            */
+            for(int y = position.getY() + 1; y <= position.getY() + 4; y++){
+                Position pos = new Position(position.getX(), y);
+                if(!plateau.estLibre(pos) && plateau.getIntersection(pos).equals(couleur)){
+                    pierres++;
+                }
+                else{
+                    break;
+                }
+            }
+
+            /* 
+                bas
+            */
+            for(int y = position.getY() - 1; y >= position.getY() - 4; y--){
+                Position pos = new Position(position.getX(), y);
+                if(!plateau.estLibre(pos) && plateau.getIntersection(pos).equals(couleur)){
+                    pierres++;
+                }
+                else{
+                    break;
+                }
+            }
+
+
+            
+            if(pierres >= 4){
+                this.terminerPartie();
+            }
         }
 
 
@@ -176,6 +247,19 @@ public class Jeu implements Ecouteur{
         this.afficherInformations();
     }
 
+
+
+
+
+    public void terminerPartie(){
+        System.out.println("Partie terminée");
+    }
+
+
+
+
+
+
     public Joueur getJoueur(Couleur couleur) {
         if(this.joueurs.containsKey(couleur)){
             return this.joueurs.get(couleur);
@@ -184,6 +268,9 @@ public class Jeu implements Ecouteur{
             return null;
         }
     }
+
+
+
 
     public void setJoueur(Couleur couleur, Joueur joueur) {
         if(this.joueurs.containsKey(couleur)){
