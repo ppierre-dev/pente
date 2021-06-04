@@ -1,31 +1,14 @@
 import java.util.Random;
 
-public class IA2 extends Joueur{
+
+public class IA2 extends IA{
     Random randomGenerator = new Random();
 
     public IA2(Couleur couleur, Jeu jeu){
         super(couleur, jeu);
     }
-
+    @Override
     public Position calculerCoup(){
-        boolean libre;
-        Position position;
-        libre = false;
-        int x = randomGenerator.nextInt(19);
-        int y = randomGenerator.nextInt(19);
-        position = new Position(x,y);
-        while(libre == false){
-            libre = Jeu.getInstancePrincipale().getPlateau().estLibre(position);
-            if(libre == false){
-                x = randomGenerator.nextInt(19);
-                y = randomGenerator.nextInt(19);
-                position = new Position(x,y);
-            }
-        }
-        return position;
-    }
-
-    public Position calculerCoupniveau2(){
         Position position;
         Position positiontest;
         Integer suite;
@@ -100,7 +83,6 @@ public class IA2 extends Joueur{
         }
         
         return position;
-        //this.getCouleur()
     }
 
 }
