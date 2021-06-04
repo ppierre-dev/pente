@@ -18,10 +18,10 @@ public class Joueur{
         this.setJeu(jeu);
     }
 
-    public final void poserPion(Position position){
-        this.getJeu().getPlateau().poserPion(this.getCouleur(), position);
-        this.getJeu().mettreAJour(position);
-        // ici test
+    public void poserPion(Position position){
+        if(this.getJeu().getPlateau().poserPion(this.getCouleur(), position)){
+           this.getJeu().mettreAJour(position); 
+        }
     }
 
     /**
@@ -71,11 +71,11 @@ public class Joueur{
         this.couleur = couleur;
     }
 
-    private Jeu getJeu(){
+    public Jeu getJeu(){
         return this.jeu;
     }
 
-    private void setJeu(Jeu jeu) {
+    public void setJeu(Jeu jeu) {
         this.jeu = jeu;
     }
 

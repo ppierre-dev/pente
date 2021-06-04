@@ -25,6 +25,13 @@ public class IA extends Joueur{
         return position;
     }
 
+    @Override
+    public void poserPion(Position position){
+        if(this.getJeu().getPlateau().poserPion(this.getCouleur(), this.calculerCoup())){
+           this.getJeu().mettreAJour(position); 
+        }
+    }
+
     public Position calculerCoupniveau2(){
         Position position;
         Position positiontest;
@@ -59,12 +66,10 @@ public class IA extends Joueur{
                     }
 
 
-                    }
                 }
             }
         }
         return position;
-        this.getCouleur()
     }
 
 }

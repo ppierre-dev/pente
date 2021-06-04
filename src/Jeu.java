@@ -140,10 +140,6 @@ public class Jeu implements Ecouteur{
      * et passe au joueur suivant
      */
     public void mettreAJour(Position position){
-        /*
-            Vérifications des alignements
-            de pierre
-        */
 
         for(Couleur couleur : Couleur.values()){
             Plateau plateau = this.getPlateau();
@@ -157,8 +153,14 @@ public class Jeu implements Ecouteur{
                 la bonne couleur
             */        
 
-            int pierres = 0;
 
+
+            /*
+                Vérifications des alignements
+                de pierre
+            */
+
+            int pierres = 0;
             /* 
                 Test alignement horizontal
             */
