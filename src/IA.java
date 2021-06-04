@@ -15,7 +15,7 @@ public class IA extends Joueur{
         int y = randomGenerator.nextInt(19);
         position = new Position(x,y);
         while(libre == false){
-            libre = Jeu.getInstancePrincipale().getPlateau().estLibre(position);
+            libre = this.getJeu().getPlateau().estLibre(position);
             if(libre == false){
                 x = randomGenerator.nextInt(19);
                 y = randomGenerator.nextInt(19);
