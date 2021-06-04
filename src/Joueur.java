@@ -20,6 +20,7 @@ public class Joueur{
 
     public final void poserPion(Position position){
         this.getJeu().getPlateau().poserPion(this.getCouleur(), position);
+        this.getJeu().mettreAJour();
     }
 
     /**
