@@ -24,7 +24,6 @@ public class IA extends Joueur{
         }
         return position;
     }
-<<<<<<< HEAD
 
     @Override
     public void poserPion(Position position){
@@ -33,46 +32,4 @@ public class IA extends Joueur{
         }
     }
 
-    public Position calculerCoupniveau2(){
-        Position position;
-        Position positiontest;
-        Integer suite;
-        suite = 1;
-        int place;
-        position = new Position(0,0);
-        boolean libre;
-        for (int x=0; x<19;x++) {
-            for (int y=0; y<19;y++) {
-                position = new Position(x,y);
-                libre = Jeu.getInstancePrincipale().getPlateau().estLibre(position);
-                if(libre == false && Jeu.getInstancePrincipale().getPlateau().getIntersection(position) != this.getCouleur()){
-                    for(int a=x; a< a + 3; a++){
-                        positiontest = new Position(a,y);
-                        if(Jeu.getInstancePrincipale().getPlateau().estLibre(positiontest) == false && Jeu.getInstancePrincipale().getPlateau().getIntersection(position) != this.getCouleur()){
-                            suite++;
-                            if(suite == 4){
-                                place = 1;
-                            }
-                        }
-                    }
-                    suite = 1;
-                    for(int a=x; a > a - 3; a--){
-                        positiontest = new Position(a,y);
-                        if(Jeu.getInstancePrincipale().getPlateau().estLibre(positiontest) == false && Jeu.getInstancePrincipale().getPlateau().getIntersection(position) != this.getCouleur()){
-                            suite = suite + 1;
-                            if(suite == 4){
-                                place = 1;
-                            }
-                        }
-                    }
-
-
-                }
-            }
-        }
-        return position;
-    }
-
-=======
->>>>>>> f89fa008a840066e65183f5cb6a5f3239196d8c6
 }
