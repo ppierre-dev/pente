@@ -8,6 +8,7 @@ public class Joueur{
     private Jeu jeu;
     private Couleur couleur;
     private String nom;
+    private int pairesPrises = 0;
 
     /**
      * Constructeur par défaut
@@ -24,6 +25,16 @@ public class Joueur{
         }
     }
 
+    public int getPairesPrises(){
+        return this.pairesPrises;
+    }
+
+    public void incrementerPairesPrises(){
+        this.pairesPrises++;
+    }
+
+
+
     /**
      * Obtenir le nombre de pions du joueur
      * @return
@@ -31,13 +42,6 @@ public class Joueur{
     public final int getNombrePions(){
         return this.getJeu().getPlateau().getNombrePionsCouleur(this.getCouleur());
     }
-
-
-
-
-
-
-
 
     /**
      * Obtenir le nom du joueur

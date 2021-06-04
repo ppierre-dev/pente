@@ -56,6 +56,20 @@ public final class Plateau implements Ecouteur{
         }
     }
 
+    public boolean retirerPion(Position position){
+        if(!this.getJeu().getEtatPartie()){
+            return false;
+        }
+
+        if(!this.estLibre(position)){
+            this.getIntersections()[position.getX()][position.getY()] = null;
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     public boolean poserPion(Couleur couleur, Position position){
         if(!this.getJeu().getEtatPartie()){
             return false;

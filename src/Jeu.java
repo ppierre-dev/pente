@@ -31,11 +31,11 @@ public class Jeu implements Ecouteur{
     public Jeu(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Saissisez le nom du joueur 1 (Blanc) : ");
-        joueurs.put(Couleur.BLANC, new IA(Couleur.BLANC, this));
+        joueurs.put(Couleur.BLANC, new Joueur(Couleur.BLANC, this));
         joueurs.get(Couleur.BLANC).setNom(scanner.nextLine());
         
         System.out.println("Saissisez le nom du joueur 2 (Noir) : ");
-        joueurs.put(Couleur.NOIR, new IA(Couleur.NOIR, this));
+        joueurs.put(Couleur.NOIR, new Joueur(Couleur.NOIR, this));
         joueurs.get(Couleur.NOIR).setNom(scanner.nextLine());
 
         double random = Math.random();
@@ -159,152 +159,35 @@ public class Jeu implements Ecouteur{
             */        
 
 
-
             /*
-                Vérifications des alignements
+                Vérification des alignements
                 de pierre
             */
 
-            int pierres = 0;
-            /* 
-                Test alignement horizontal
-            */
-            pierres = 0;
+            this.testerAlignement(position, couleur, -1, 0); /* Horizontale gauche */
+            this.testerAlignement(position, couleur, 1, 0);  /* Horizontale droite */
+            this.testerAlignement(position, couleur, 0, -1); /* Verticale haut */
+            this.testerAlignement(position, couleur, 0, -1); /* Verticale bas */
+            this.testerAlignement(position, couleur, -1, -1); /* Diagonale haut-gauche */
+            this.testerAlignement(position, couleur, 1, -1); /* Diagonale haut-droite */
+            this.testerAlignement(position, couleur, -1, 1); /* Diagonale bas-gauche */
+            this.testerAlignement(position, couleur, 1, 1); /* Diagonale bas-droite */
+
+            
             /*
-                gauche
-            */  
-            for(int x = position.getX() - 1; x >= position.getX() - 4; x--){
-                Position pos = new Position(x, position.getY());
-                if(!plateau.estLibre(pos) && plateau.getIntersection(pos) != null && plateau.getIntersection(pos).equals(couleur)){
-                    pierres++;
-                    System.out.println(pos.getX() + "; " + pos.getY());
-                }
-                else{
-                    break;
-                }
-            }
-            /* 
-                droite
+                Vérification des prises
+                de pierre
             */
-            for(int x = position.getX() + 1; x <= position.getX() + 4; x++){
-                Position pos = new Position(x, position.getY());
-                if(!plateau.estLibre(pos) && plateau.getIntersection(pos) != null && plateau.getIntersection(pos).equals(couleur)){
-                    pierres++;
-                }
-                else{
-                    break;
-                }
-            }
-            if(pierres >= 4){
-                this.terminerPartie();
-                this.getInterfaceGraphique().getBordure1().setVisible(false);
-            }
 
+            this.testerPrise(position, couleur, -1, 0); /* Horizontale gauche */
+            this.testerPrise(position, couleur, 1, 0);  /* Horizontale droite */
+            this.testerPrise(position, couleur, 0, -1); /* Verticale haut */
+            this.testerPrise(position, couleur, 0, -1); /* Verticale bas */
+            this.testerPrise(position, couleur, -1, -1); /* Diagonale haut-gauche */
+            this.testerPrise(position, couleur, 1, -1); /* Diagonale haut-droite */
+            this.testerPrise(position, couleur, -1, 1); /* Diagonale bas-gauche */
+            this.testerPrise(position, couleur, 1, 1); /* Diagonale bas-droite */
 
-
-            /* 
-                Test alignement vertical
-            */
-            pierres = 0;
-            /*
-                haut
-            */
-            for(int y = position.getY() + 1; y <= position.getY() + 4; y++){
-                Position pos = new Position(position.getX(), y);
-                if(!plateau.estLibre(pos) && plateau.getIntersection(pos) != null && plateau.getIntersection(pos).equals(couleur)){
-                    pierres++;
-                }
-                else{
-                    break;
-                }
-            }
-            /* 
-                bas
-            */
-            for(int y = position.getY() - 1; y >= position.getY() - 4; y--){
-                Position pos = new Position(position.getX(), y);
-                if(!plateau.estLibre(pos) && plateau.getIntersection(pos) != null && plateau.getIntersection(pos).equals(couleur)){
-                    pierres++;
-                }
-                else{
-                    break;
-                }
-            }
-            if(pierres >= 4){
-                this.terminerPartie();
-            }
-
-
-
-
-
-
-            /* 
-                Test alignement diagonale en "\"
-            */
-            pierres = 0;
-            /*
-                haut à gauche
-            */
-            for(int k = 1; k <= 4; k++){
-                Position pos = new Position(position.getX() - k, position.getY() - k);
-                if(!plateau.estLibre(pos) && plateau.getIntersection(pos) != null && plateau.getIntersection(pos).equals(couleur)){
-                    pierres++;
-                }
-                else{
-                    break;
-                }
-            }
-            /*
-                bas à droite
-            */
-            for(int k = 1; k <= 4; k++){
-                Position pos = new Position(position.getX() + k, position.getY() + k);
-                if(!plateau.estLibre(pos) && plateau.getIntersection(pos) != null && plateau.getIntersection(pos).equals(couleur)){
-                    pierres++;
-                }
-                else{
-                    break;
-                }
-            }
-            if(pierres >= 4){
-                this.terminerPartie();
-            }
-
-
-
-
-            /* 
-                Test alignement diagonale en "/"
-            */
-            pierres = 0;
-            /*
-                haut à droite
-            */
-            for(int k = 1; k <= 4; k++){
-                Position pos = new Position(position.getX() + k, position.getY() - k);
-                if(!plateau.estLibre(pos) && plateau.getIntersection(pos) != null && plateau.getIntersection(pos).equals(couleur)){
-                    pierres++;
-                }
-                else{
-                    break;
-                }
-            }
-            /*
-                bas à gauche
-            */
-            for(int k = 1; k <= 4; k++){
-                Position pos = new Position(position.getX() - k, position.getY() + k);
-                if(!plateau.estLibre(pos) && plateau.getIntersection(pos) != null && plateau.getIntersection(pos).equals(couleur)){
-                    pierres++;
-                }
-                else{
-                    break;
-                }
-            }
-            if(pierres >= 4){
-                this.terminerPartie();
-            }
         }
 
 
@@ -318,13 +201,56 @@ public class Jeu implements Ecouteur{
             this.setTourJoueur(Couleur.BLANC);
         }
 
+        this.afficherInformations();
+
         if(this.getJoueur(this.getTourJoueur()) instanceof IA){
             IA ia = (IA) this.getJoueur(this.getTourJoueur());
             ia.poserPion(ia.calculerCoup());
         }
-        this.afficherInformations();
     }
 
+
+    public void testerAlignement(Position positionInitiale, Couleur couleur,  int dirX, int dirY){
+
+        int pierres = 0;
+        for(int k=1; k<=4; k++){
+            Position pos = new Position(
+                positionInitiale.getX() + (k * dirX),
+                positionInitiale.getY() + (k * dirY)
+            );
+            if(!plateau.estLibre(pos) && plateau.getIntersection(pos) != null && plateau.getIntersection(pos).equals(couleur)){
+                pierres++;
+            }
+        }
+        if(pierres >= 4){
+            this.terminerPartie();
+        }
+    }
+
+    public void testerPrise(Position positionInitiale, Couleur couleurPreneur, int dirX, int dirY){
+        Position p1 = new Position(positionInitiale.getX() + dirX, positionInitiale.getY() + dirY);
+        Couleur c1 = this.getPlateau().getIntersection(p1);
+            if(c1 != null && c1 != couleurPreneur){
+                /* Il y a un pion d'un adversaire */
+                Position p2 = new Position(positionInitiale.getX() + 2 * dirX, positionInitiale.getY() + 2 * dirY);
+                Couleur c2 = this.getPlateau().getIntersection(p2);
+                if(c2 != null && c2 == c1){
+                    /* Il y a deux pions du même adversaire */
+                    Position p3 = new Position(positionInitiale.getX() + 3 * dirX, positionInitiale.getY() + 3 * dirY);
+                    Couleur c3 = this.getPlateau().getIntersection(p3);
+                    if(c3 != null && c3 == couleurPreneur){
+                        /* Le joueur a capturée une paire adverse */
+                        this.getPlateau().retirerPion(p1);
+                        this.getPlateau().retirerPion(p2);
+                        this.getJoueur(couleurPreneur).incrementerPairesPrises();
+
+                        if(this.getJoueur(couleurPreneur).getPairesPrises() >= 5){
+                            this.terminerPartie();
+                        }
+                    }
+                }
+            }
+    }
 
 
 
