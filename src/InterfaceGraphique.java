@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 /**
  * Classe InterfaceGraphique
@@ -26,9 +27,9 @@ public class InterfaceGraphique extends JFrame{
         this.setLayout(null);
         this.setResizable(false);
 
-
         this.setJeu(jeu);
-        this.setCanvas(new Canvas(this.getJeu()));
+        Canvas canvas = new Canvas(this.getJeu());
+        this.setCanvas(canvas);
         this.getCanvas().setLocation(30, 30);
         this.add(this.getCanvas());
 
@@ -68,7 +69,7 @@ public class InterfaceGraphique extends JFrame{
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         //this.setVisible(true);
-        this.setAlwaysOnTop(true);
+        //this.setAlwaysOnTop(true);
     }
 
     public CadreInformation getCadreInformationBlanc() {

@@ -66,18 +66,25 @@ public class CadreInformation extends JPanel{
         this.add(this.getLabelJouerJoueur());
         this.getLabelJouerJoueur().setSize(500, 50);
         this.getLabelJouerJoueur().setLocation(0, 280);
-        this.getLabelJouerJoueur().setText("C'est " + "\u00e0" + " vous de jouer !");
         this.getLabelJouerJoueur().validate();
         this.getLabelJouerJoueur().repaint();
         this.getLabelJouerJoueur().setFont(new Font("Yu Gothic", Font.BOLD, 18));
         this.getLabelJouerJoueur().setHorizontalAlignment(SwingConstants.CENTER);
-        this.getLabelJouerJoueur().setForeground(Color.GREEN);
-        this.getLabelJouerJoueur().setVisible(false);
+        this.getLabelJouerJoueur().setVisible(true);
 
-        /*JButton annuler = new JButton();
-        this.setButtonAnnuler(annuler);*/
+        this.afficherMessageJouer();
 
         this.setVisible(true);
+    }
+
+    public void afficherMessageJouer(){
+        this.getLabelJouerJoueur().setForeground(Color.GREEN);
+        this.getLabelJouerJoueur().setText("C'est \u00e0 vous de jouer !");
+    }
+
+    public void afficherMessageAnnuler(){
+        this.getLabelJouerJoueur().setForeground(Color.RED);
+        this.getLabelJouerJoueur().setText("Annuler via clique droit sur le plateau");
     }
 
     /**

@@ -4,7 +4,7 @@ import java.lang.annotation.Annotation;
  * Classe Plateau
  * Représente un plateau de jeu
  */
-public final class Plateau implements Ecouteur{
+public final class Plateau{
     public static int DIMENSION = 19;
     private Couleur[][] intersections;
     private Jeu jeu;
@@ -81,6 +81,7 @@ public final class Plateau implements Ecouteur{
 
         if(this.getNombrePionsCouleur(couleur) < Joueur.MAX_PIONS){
             if(this.estLibre(position)){
+                this.getJeu().enregistrerEtat();
                 this.getIntersections()[position.getX()][position.getY()] = couleur;
                 return true;
             }
@@ -126,6 +127,14 @@ public final class Plateau implements Ecouteur{
             }
         }
         return compteur;
+    }
+
+    public void copy(Plateau p){
+        for(int x=0; x<Plateau.DIMENSION; x++){
+            for(int y=0; y<Plateau.DIMENSION; y++){
+                this.intersections[x][y] = p.getIntersection(new Position(x, y));
+            }
+        }
     }
 
     private Jeu getJeu(){

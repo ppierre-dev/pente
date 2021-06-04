@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
  * Classe Canvas
  * Gère le dessin graphique du jeu
  */
-public class Canvas extends JPanel implements MouseListener, Ecouteur{
+public class Canvas extends JPanel implements MouseListener{
 
     private static int DIMENSION_CASE = 30;
     private static int DIMENSION_INTERSECTION = 6;
@@ -60,7 +60,7 @@ public class Canvas extends JPanel implements MouseListener, Ecouteur{
         /*
             Pour chaque joueur de la partie
          */
-        for(Couleur couleur : this.getJeu().getJoueurs().keySet()){
+        //for(Couleur couleur : this.getJeu().getJoueurs().keySet()){
             
             /*
                 Pour chacun de ses pions
@@ -87,7 +87,7 @@ public class Canvas extends JPanel implements MouseListener, Ecouteur{
                 }
             }
 
-        }
+        //}
     }
 
     @Override
@@ -102,17 +102,22 @@ public class Canvas extends JPanel implements MouseListener, Ecouteur{
         if(this.getJeu().getJoueur(this.getJeu().getTourJoueur()) instanceof IA){
             return;
         }
-        
-        Position position = new Position(
-            e.getX() / (Canvas.DIMENSION_CASE + Canvas.DIMENSION_INTERSECTION),
-            e.getY() / (Canvas.DIMENSION_CASE + Canvas.DIMENSION_INTERSECTION)
-        );
 
-        GestionnaireEcouteurs.emettre(new EvenementClic(position));
+        if(e.getButton() == MouseEvent.BUTTON1){
+            Position position = new Position(
+                e.getX() / (Canvas.DIMENSION_CASE + Canvas.DIMENSION_INTERSECTION),
+                e.getY() / (Canvas.DIMENSION_CASE + Canvas.DIMENSION_INTERSECTION)
+            );
 
-        this.getJeu().getJoueur(this.getJeu().getTourJoueur()).poserPion(position);
+            this.getJeu().getJoueur(this.getJeu().getTourJoueur()).poserPion(position);
+        }
+        else if(e.getButton() == MouseEvent.BUTTON3){
+            this.getJeu().revenirEtatPrecedent();
+            this.getJeu().afficherInformations();
+        }
+
         this.repaint();
-        
+
     }
 
     @Override
