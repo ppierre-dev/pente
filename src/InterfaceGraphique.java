@@ -12,18 +12,20 @@ public class InterfaceGraphique extends JFrame{
     private Canvas canvas;
     private CadreInformation cadreInformationBlanc;
     private CadreInformation cadreInformationNoir;
+    private Jeu jeu;
     
     /**
      * Constructeur
      */
-    public InterfaceGraphique(){
+    public InterfaceGraphique(Jeu jeu){
         this.setTitle("Jeu de pente");
         this.setSize(new Dimension(1300, 800));
         this.setLayout(null);
         this.setResizable(false);
 
-        Canvas canvas = new Canvas();
-        this.setCanvas(canvas);
+
+        this.setJeu(jeu);
+        this.setCanvas(new Canvas(this.getJeu()));
         this.getCanvas().setLocation(30, 30);
         this.add(this.getCanvas());
 
@@ -60,7 +62,7 @@ public class InterfaceGraphique extends JFrame{
         this.add(bordure2);
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setVisible(true);
+        //this.setVisible(true);
         this.setAlwaysOnTop(true);
     }
 
@@ -94,5 +96,13 @@ public class InterfaceGraphique extends JFrame{
      */
     public Canvas getCanvas(){
         return this.canvas;
+    }
+
+    private void setJeu(Jeu jeu){
+        this.jeu = jeu;
+    }
+
+    private Jeu getJeu(){
+        return this.jeu;
     }
 }

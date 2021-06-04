@@ -1,19 +1,23 @@
+import java.lang.annotation.Annotation;
+
 /**
  * Classe Plateau
  * Représente un plateau de jeu
  */
-public class Plateau{
+public final class Plateau implements Ecouteur{
     public static int DIMENSION = 19;
-    private Pion[][] intersections;
+    private Couleur[][] intersections;
+    private Jeu jeu;
 
     /**
      * Constructeur par défaut
      * Initialise le tableau de intersections
      * par des valeurs null indiquant
-     * l'absence de pions
+     * l'absence de Couleurs
      */
-    public Plateau(){
-        Pion[][] intersections_ = new Pion[Plateau.DIMENSION][Plateau.DIMENSION];
+    public Plateau(Jeu jeu){
+        this.setJeu(jeu);
+        Couleur[][] intersections_ = new Couleur[Plateau.DIMENSION][Plateau.DIMENSION];
         for(int x=0; x<Plateau.DIMENSION; x++){
             for(int y=0; y<Plateau.DIMENSION; y++){
                 intersections_[x][y] = null;
@@ -26,7 +30,7 @@ public class Plateau{
      * Obtenir les intersections du plateau
      * @return
      */
-    public Pion[][] getIntersections(){
+    public Couleur[][] getIntersections(){
         return this.intersections;
     }
 
@@ -34,7 +38,7 @@ public class Plateau{
      * Définir les intersections du plateau
      * @param intersections
      */
-    public void setIntersections(Pion[][] intersections){
+    public void setIntersections(Couleur[][] intersections){
         this.intersections = intersections;
     }
 
@@ -42,15 +46,26 @@ public class Plateau{
         return this.getIntersections()[position.getX()][position.getY()] == null;
     }
 
-    public void ajouterPion(Pion pion, Position position){
-        if(this.getNombrePionsCouleur(pion.getCouleur()) < 60){
+    public boolean poserPion(Couleur couleur, Position position){
+        if(!(this.getJeu().getTourJoueur().equals(couleur))){
+            return false;
+        }
+
+        if(this.getNombrePionsCouleur(couleur) < Joueur.MAX_PIONS){
             if(this.estLibre(position)){
-                this.getIntersections()[position.getX()][position.getY()] = pion;
+                this.getIntersections()[position.getX()][position.getY()] = couleur;
+                return true;
             }
+            else{
+                return false;
+            }
+        }
+        else{
+            return false;
         }
     }
 
-    public Pion getIntersection(Position position){
+    public Couleur getIntersection(Position position){
         if(this.estLibre(position)){
             return null;
         }
@@ -65,7 +80,7 @@ public class Plateau{
             for(int y=0; y<Plateau.DIMENSION; y++){
 
                 if(this.getIntersections()[x][y] != null){
-                    if(this.getIntersections()[x][y].getCouleur().equals(couleur)){
+                    if(this.getIntersections()[x][y].equals(couleur)){
                         compteur++;
                     }
                 }
@@ -73,5 +88,13 @@ public class Plateau{
             }
         }
         return compteur;
+    }
+
+    private Jeu getJeu(){
+        return this.jeu;
+    }
+
+    private void setJeu(Jeu jeu) {
+        this.jeu = jeu;
     }
 }

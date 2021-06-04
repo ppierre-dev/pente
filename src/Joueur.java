@@ -1,21 +1,41 @@
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class Joueur {
+public class Joueur{
     
     public static int MAX_PIONS = 60;
 
-    private ArrayList<Pion> pions;
+    private Jeu jeu;
     private Couleur couleur;
     private String nom;
 
     /**
      * Constructeur par défaut
      */
-    public Joueur(Couleur couleur){
+    public Joueur(Couleur couleur, Jeu jeu){
         this.setCouleur(couleur);
         this.setNom(this.getCouleur().toString());
+        this.setJeu(jeu);
     }
+
+    public final void poserPion(Position position){
+        this.getJeu().getPlateau().poserPion(this.getCouleur(), position);
+    }
+
+    /**
+     * Obtenir le nombre de pions du joueur
+     * @return
+     */
+    public final int getNombrePions(){
+        return this.getJeu().getPlateau().getNombrePionsCouleur(this.getCouleur());
+    }
+
+
+
+
+
+
+
 
     /**
      * Obtenir le nom du joueur
@@ -34,14 +54,6 @@ public class Joueur {
     }
 
     /**
-     * Obtenir le nombre de pions du joueur
-     * @return
-     */
-    public int getNombrePions(){
-        return Jeu.getPlateau().getNombrePionsCouleur(this.getCouleur());
-    }
-
-    /**
      * Obtenir la couleur du joueur
      * @return
      */
@@ -55,6 +67,14 @@ public class Joueur {
      */
     private void setCouleur(Couleur couleur){
         this.couleur = couleur;
+    }
+
+    private Jeu getJeu(){
+        return this.jeu;
+    }
+
+    private void setJeu(Jeu jeu) {
+        this.jeu = jeu;
     }
 
 }

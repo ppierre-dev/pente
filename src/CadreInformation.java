@@ -11,6 +11,7 @@ public class CadreInformation extends JPanel{
     private JLabel labelCouleurJoueur;
     private JLabel pions;
     private JLabel jouer;
+    private JButton annuler;
 
     /**
      * Constructeur
@@ -62,6 +63,9 @@ public class CadreInformation extends JPanel{
         this.getLabelJouerJoueur().setForeground(Color.GREEN);
         this.getLabelJouerJoueur().setVisible(false);
 
+        /*JButton annuler = new JButton();
+        this.setButtonAnnuler(annuler);*/
+
         this.setVisible(true);
     }
 
@@ -111,6 +115,14 @@ public class CadreInformation extends JPanel{
 
     public JLabel getLabelJouerJoueur() {
         return this.jouer;
+    }
+
+    public JButton getButtonAnnuler(){
+        return this.annuler;
+    }
+
+    public void setButtonAnnuler(JButton annuler){
+        this.annuler = annuler;
     }
 
     public String getNom(){

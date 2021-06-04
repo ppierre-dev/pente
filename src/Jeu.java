@@ -5,60 +5,125 @@ import java.util.Scanner;
  * Classe Jeu
  * Classe principale de gestion du jeu
  */
-public abstract class Jeu {
-    private static InterfaceGraphique interfaceGraphique;
-    private static Plateau plateau = new Plateau();
-    private static Couleur tourJoueur = Couleur.NOIR;
-    private static HashMap<Couleur, Joueur> joueurs = new HashMap<Couleur, Joueur>();
-    private static AvantDernierCoup avantDernierCoup;
+public class Jeu implements Ecouteur{
+
+    private static Jeu instancePrincipale = new Jeu();
+
+    private InterfaceGraphique interfaceGraphique;
+    private Plateau plateau = new Plateau(this);
+    private Couleur tourJoueur = Couleur.NOIR;
+    private HashMap<Couleur, Joueur> joueurs = new HashMap<Couleur, Joueur>();
+    private AvantDernierCoup avantDernierCoup;
     public static void main(String[] args){
 
+        GestionnaireEcouteurs.enregistrerEcouteur(Jeu.getInstancePrincipale());
+        /*GestionnaireEcouteurs.enregistrerEcouteur(Jeu.getInstancePrincipale().getPlateau());
+        GestionnaireEcouteurs.enregistrerEcouteur(Jeu.getInstancePrincipale().getInterfaceGraphique().getCanvas());*/
         GestionnaireImages.setImage("PionBlanc", "../images/PionBlanc.png");
         GestionnaireImages.setImage("PionNoir", "../images/PionNoir.png");
 
+    }
+
+
+
+
+    public Jeu(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Saissisez le nom du joueur 1 (Blanc) : ");
-        joueurs.put(Couleur.BLANC, new Joueur(Couleur.BLANC));
+        joueurs.put(Couleur.BLANC, new Joueur(Couleur.BLANC, this));
         joueurs.get(Couleur.BLANC).setNom(scanner.nextLine());
         
         System.out.println("Saissisez le nom du joueur 2 (Noir) : ");
-        joueurs.put(Couleur.NOIR, new Joueur(Couleur.NOIR));
+        joueurs.put(Couleur.NOIR, new Joueur(Couleur.NOIR, this));
         joueurs.get(Couleur.NOIR).setNom(scanner.nextLine());
-
-        Jeu.getPlateau().ajouterPion(new Pion(Couleur.BLANC, new Position(3, 2)));
 
         double random = Math.random();
         if(random < 0.5){
-            Jeu.setTourJoueur(Couleur.BLANC);
+            this.setTourJoueur(Couleur.BLANC);
         }
         else{
-            Jeu.setTourJoueur(Couleur.NOIR);
+            this.setTourJoueur(Couleur.NOIR);
         }
-        Jeu.interfaceGraphique = new InterfaceGraphique();
-        Jeu.afficherInformations();
+
+        this.setInterfaceGraphique(new InterfaceGraphique(this));
+        this.getInterfaceGraphique().setVisible(true);
+
+        this.afficherInformations();
+
+        this.getJoueur(this.getTourJoueur()).poserPion(new Position(
+            Math.abs(this.getPlateau().DIMENSION / 2),
+            Math.abs(this.getPlateau().DIMENSION / 2)
+        ));
     }
+
+
+
+
+    /**
+     * Gère les affichages textuels du jeu
+     */
+    public void afficherInformations(){
+        this.interfaceGraphique.getCadreInformationBlanc().setNom(this.joueurs.get(Couleur.BLANC).getNom());
+        this.interfaceGraphique.getCadreInformationNoir().setNom(this.joueurs.get(Couleur.NOIR).getNom());
+
+        this.interfaceGraphique.getCadreInformationBlanc().setCouleur(Couleur.BLANC);
+        this.interfaceGraphique.getCadreInformationNoir().setCouleur(Couleur.NOIR);
+
+        if(this.tourJoueur.equals(Couleur.BLANC)){
+            this.interfaceGraphique.getCadreInformationBlanc().getLabelJouerJoueur().setVisible(true);
+            this.interfaceGraphique.getCadreInformationNoir().getLabelJouerJoueur().setVisible(false);
+        }
+        else{
+            this.interfaceGraphique.getCadreInformationBlanc().getLabelJouerJoueur().setVisible(false);
+            this.interfaceGraphique.getCadreInformationNoir().getLabelJouerJoueur().setVisible(true);
+        }
+
+        this.interfaceGraphique.getCadreInformationBlanc().setPions(String.valueOf(Joueur.MAX_PIONS - this.joueurs.get(Couleur.BLANC).getNombrePions()));
+        this.interfaceGraphique.getCadreInformationNoir().setPions(String.valueOf(Joueur.MAX_PIONS - this.joueurs.get(Couleur.NOIR).getNombrePions()));
+    }
+
+
+
+
+
 
     /**
      * Obtenir le plateau du jeu
      * @return Une instance de Plateau
      */
-    public static Plateau getPlateau(){
-        return Jeu.plateau;
+    public Plateau getPlateau(){
+        return this.plateau;
     }
 
     /**
      * Définir le plateau du jeu
      * @param plateau Une instance de Plateau
      */
-    public static void setPlateau(Plateau plateau){
-        Jeu.plateau = plateau;
+    public void setPlateau(Plateau plateau){
+        this.plateau = plateau;
+    }
+
+    /**
+     * Obtenir l'interface graphique du jeu
+     * @return Une instance de InterfaceGraphique
+     */
+    public InterfaceGraphique getInterfaceGraphique(){
+        return this.interfaceGraphique;
+    }
+
+    /**
+     * Définir l'interface graphique du jeu
+     * @param plateau Une instance de InterfaceGraphique
+     */
+    public void setInterfaceGraphique(InterfaceGraphique interfaceGraphique){
+        this.interfaceGraphique = interfaceGraphique;
     }
 
     /**
      * Obtenir la couleur du joueur qui doit jouer
      * @return
      */
-    public static Couleur getTourJoueur(){
+    public Couleur getTourJoueur(){
         return tourJoueur;
     }
 
@@ -66,26 +131,15 @@ public abstract class Jeu {
      * Définir en interne la couleur du joueur qui doit jouer
      * @return
      */
-    private static void setTourJoueur(Couleur tourJoueur){
-        Jeu.tourJoueur = tourJoueur;
-    }
-
-    public static void poserPion(Position position){
-        Joueur joueur = Jeu.getJoueur(Jeu.getTourJoueur());
-        if(joueur.getNombrePions() <= Joueur.MAX_PIONS){
-            if(Jeu.getPlateau().estLibre(position)){
-                Jeu.getPlateau().ajouterPion(new Pion(joueur.getCouleur(), position));
-            }
-        }
-        
-        Jeu.mettreAJour();
+    private void setTourJoueur(Couleur tourJoueur){
+        this.tourJoueur = tourJoueur;
     }
 
     /**
      * Effectue le coup du joueur sur le plateau
      * et passe au joueur suivant
      */
-    public static void mettreAJour(){
+    public void mettreAJour(){
         /*
             Traitement du plateau
             à venir
@@ -94,55 +148,36 @@ public abstract class Jeu {
         /*
             Passer au joueur suivant
          */
-        if(Jeu.getTourJoueur().equals(Couleur.BLANC)){
-            Jeu.setTourJoueur(Couleur.NOIR);
+        if(this.getTourJoueur().equals(Couleur.BLANC)){
+            this.setTourJoueur(Couleur.NOIR);
         }
         else{
-            Jeu.setTourJoueur(Couleur.BLANC);
+            this.setTourJoueur(Couleur.BLANC);
         }
-        Jeu.afficherInformations();
+        this.afficherInformations();
     }
 
-    /**
-     * Gère les affichages textuels du jeu
-     */
-    public static void afficherInformations(){
-        Jeu.interfaceGraphique.getCadreInformationBlanc().setNom(Jeu.joueurs.get(Couleur.BLANC).getNom());
-        Jeu.interfaceGraphique.getCadreInformationNoir().setNom(Jeu.joueurs.get(Couleur.NOIR).getNom());
-
-        Jeu.interfaceGraphique.getCadreInformationBlanc().setCouleur(Couleur.BLANC);
-        Jeu.interfaceGraphique.getCadreInformationNoir().setCouleur(Couleur.NOIR);
-
-        if(Jeu.tourJoueur.equals(Couleur.BLANC)){
-            Jeu.interfaceGraphique.getCadreInformationBlanc().getLabelJouerJoueur().setVisible(true);
-            Jeu.interfaceGraphique.getCadreInformationNoir().getLabelJouerJoueur().setVisible(false);
-        }
-        else{
-            Jeu.interfaceGraphique.getCadreInformationBlanc().getLabelJouerJoueur().setVisible(false);
-            Jeu.interfaceGraphique.getCadreInformationNoir().getLabelJouerJoueur().setVisible(true);
-        }
-
-        Jeu.interfaceGraphique.getCadreInformationBlanc().setPions(String.valueOf(Joueur.MAX_PIONS - Jeu.joueurs.get(Couleur.BLANC).getNombrePions()));
-        Jeu.interfaceGraphique.getCadreInformationNoir().setPions(String.valueOf(Joueur.MAX_PIONS - Jeu.joueurs.get(Couleur.NOIR).getNombrePions()));
-    }
-
-    public static Joueur getJoueur(Couleur couleur) {
-        if(Jeu.joueurs.containsKey(couleur)){
-            return Jeu.joueurs.get(couleur);
+    public Joueur getJoueur(Couleur couleur) {
+        if(this.joueurs.containsKey(couleur)){
+            return this.joueurs.get(couleur);
         }
         else{
             return null;
         }
     }
 
-    public static void setJoueur(Couleur couleur, Joueur joueur) {
-        if(Jeu.joueurs.containsKey(couleur)){
-            Jeu.joueurs.remove(couleur);
+    public void setJoueur(Couleur couleur, Joueur joueur) {
+        if(this.joueurs.containsKey(couleur)){
+            this.joueurs.remove(couleur);
         }
-        Jeu.joueurs.put(couleur, joueur);
+        this.joueurs.put(couleur, joueur);
     }
 
-    public static HashMap<Couleur, Joueur> getJoueurs(){
-        return Jeu.joueurs;
+    public HashMap<Couleur, Joueur> getJoueurs(){
+        return this.joueurs;
+    }
+
+    public static Jeu getInstancePrincipale(){
+        return Jeu.instancePrincipale;
     }
 }

@@ -8,18 +8,21 @@ import java.awt.image.BufferedImage;
  * Classe Canvas
  * Gère le dessin graphique du jeu
  */
-public class Canvas extends JPanel implements MouseListener{
+public class Canvas extends JPanel implements MouseListener, Ecouteur{
 
     private static int DIMENSION_CASE = 30;
     private static int DIMENSION_INTERSECTION = 6;
 
+    private Jeu jeu;
+
     /**
      * Constructeur
      */
-    public Canvas(){
+    public Canvas(Jeu jeu){
         this.setSize(684, 684);
         this.repaint();
         this.addMouseListener(this);
+        this.setJeu(jeu);
     }
 
     /**
@@ -57,7 +60,7 @@ public class Canvas extends JPanel implements MouseListener{
         /*
             Pour chaque joueur de la partie
          */
-        for(Couleur couleur : Jeu.getJoueurs().keySet()){
+        for(Couleur couleur : this.getJeu().getJoueurs().keySet()){
             
             /*
                 Pour chacun de ses pions
@@ -65,12 +68,12 @@ public class Canvas extends JPanel implements MouseListener{
             for(int x=0; x<Plateau.DIMENSION; x++){
                 for(int y=0; y<Plateau.DIMENSION; y++){
 
-                    if(Jeu.getPlateau().estLibre(new Position(x, y))){
+                    if(this.getJeu().getPlateau().estLibre(new Position(x, y))){
                         continue;
                     }
 
                     BufferedImage image = null;
-                    switch(Jeu.getPlateau().){
+                    switch(this.getJeu().getPlateau().getIntersection(new Position(x, y))){
                         case BLANC:
                             image = GestionnaireImages.getImage("PionBlanc");
                         break;
@@ -80,8 +83,6 @@ public class Canvas extends JPanel implements MouseListener{
                         break;
                     }
 
-                    int x = pion.getPosition().getX();
-                    int y = pion.getPosition().getY();
                     g2d.drawImage(image, (x * Canvas.DIMENSION_CASE) + (x * Canvas.DIMENSION_INTERSECTION), (y * Canvas.DIMENSION_CASE) + (y * Canvas.DIMENSION_INTERSECTION), this);
                 }
             }
@@ -96,12 +97,20 @@ public class Canvas extends JPanel implements MouseListener{
 
     @Override
     public void mousePressed(MouseEvent e) {
+
+
+        if(this.getJeu().getJoueur(this.getJeu().getTourJoueur()) instanceof IA){
+            return;
+        }
         
         Position position = new Position(
             e.getX() / (Canvas.DIMENSION_CASE + Canvas.DIMENSION_INTERSECTION),
             e.getY() / (Canvas.DIMENSION_CASE + Canvas.DIMENSION_INTERSECTION)
         );
-        Jeu.poserPion(position);
+
+        GestionnaireEcouteurs.emettre(new EvenementClic(position));
+
+        this.getJeu().getJoueur(this.getJeu().getTourJoueur()).poserPion(position);
         this.repaint();
         
     }
@@ -122,5 +131,13 @@ public class Canvas extends JPanel implements MouseListener{
     public void mouseExited(MouseEvent e) {
         // TODO Auto-generated method stub
         
+    }
+
+    private void setJeu(Jeu jeu){
+        this.jeu = jeu;
+    }
+
+    private Jeu getJeu(){
+        return this.jeu;
     }
 }
