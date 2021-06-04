@@ -139,11 +139,30 @@ public class Jeu implements Ecouteur{
      * Effectue le coup du joueur sur le plateau
      * et passe au joueur suivant
      */
-    public void mettreAJour(){
+    public void mettreAJour(Position position){
         /*
-            Traitement du plateau
-            à venir
+            Vérifications des alignements
+            de pierre
         */
+
+        for(Couleur couleur : Couleur.values()){
+            Plateau plateau = Jeu.getInstancePrincipale().getPlateau();
+            if(!plateau.getIntersection(position).equals(couleur)){
+                /* Ce n'est pas cette couleur là qui a joué le coup */
+                continue;
+            }
+
+            /*
+                Ici on saît qu'on travaille avec
+                la bonne couleur
+            */        
+
+            for(int x = position.getX() - 3; x <= position.getX() + 3; x++){
+                
+            }
+
+        }
+
 
         /*
             Passer au joueur suivant
