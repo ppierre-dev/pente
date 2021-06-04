@@ -37,12 +37,7 @@ public class Position {
      * @param x Un entier inclu dans [0, 18]
      */
     public void setX(int x) {
-        if(x >= 0 && x <= 18){
-            this.x = x;
-        }
-        else{
-            this.x = 0;
-        }
+        this.x = x;
     }
 
     /**
@@ -60,12 +55,7 @@ public class Position {
      * @param y Un entier inclu dans [0, 18]
      */
     public void setY(int y) {
-        if(y >= 0 && y <= 19){
-            this.y = y;
-        }
-        else{
-            this.y = 0;
-        }
+        this.y = y;
     }
 
 }

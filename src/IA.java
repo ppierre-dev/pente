@@ -11,14 +11,14 @@ public class IA extends Joueur{
         boolean libre;
         Position position;
         libre = false;
-        int x = randomGenerator.nextInt(19);
-        int y = randomGenerator.nextInt(19);
+        int x = randomGenerator.nextInt(Plateau.DIMENSION);
+        int y = randomGenerator.nextInt(Plateau.DIMENSION);
         position = new Position(x,y);
         while(libre == false){
             libre = this.getJeu().getPlateau().estLibre(position);
             if(libre == false){
-                x = randomGenerator.nextInt(19);
-                y = randomGenerator.nextInt(19);
+                x = randomGenerator.nextInt(Plateau.DIMENSION);
+                y = randomGenerator.nextInt(Plateau.DIMENSION);
                 position = new Position(x,y);
             }
         }
@@ -27,8 +27,15 @@ public class IA extends Joueur{
 
     @Override
     public void poserPion(Position position){
-        if(this.getJeu().getPlateau().poserPion(this.getCouleur(), this.calculerCoup())){
-           this.getJeu().mettreAJour(position); 
+        if(position == null){
+            if(this.getJeu().getPlateau().poserPion(this.getCouleur(), this.calculerCoup())){
+                this.getJeu().mettreAJour(position); 
+            }
+        }
+        else{
+            if(this.getJeu().getPlateau().poserPion(this.getCouleur(), position)){
+                this.getJeu().mettreAJour(position); 
+            }
         }
     }
 

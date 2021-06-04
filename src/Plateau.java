@@ -43,10 +43,24 @@ public final class Plateau implements Ecouteur{
     }
 
     public boolean estLibre(Position position){
-        return this.getIntersections()[position.getX()][position.getY()] == null;
+        if(position.getX() >= 0 && position.getX() < Plateau.DIMENSION){
+            if(position.getY() >= 0 && position.getY() < Plateau.DIMENSION){
+                return this.getIntersections()[position.getX()][position.getY()] == null;
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
     }
 
     public boolean poserPion(Couleur couleur, Position position){
+        if(!this.getJeu().getEtatPartie()){
+            return false;
+        }
+
         if(!(this.getJeu().getTourJoueur().equals(couleur))){
             return false;
         }
@@ -70,7 +84,17 @@ public final class Plateau implements Ecouteur{
             return null;
         }
         else{
-            return this.getIntersections()[position.getX()][position.getY()];
+            if(position.getX() >= 0 && position.getX() < Plateau.DIMENSION){
+                if(position.getY() >= 0 && position.getY() < Plateau.DIMENSION){
+                    return this.getIntersections()[position.getX()][position.getY()];
+                }
+                else{
+                    return null;
+                }
+            }
+            else{
+                return null;
+            }
         }
     }
 

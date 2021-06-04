@@ -14,6 +14,7 @@ public class Jeu implements Ecouteur{
     private Couleur tourJoueur = Couleur.NOIR;
     private HashMap<Couleur, Joueur> joueurs = new HashMap<Couleur, Joueur>();
     private AvantDernierCoup avantDernierCoup;
+    private boolean etatPartie = true;
     public static void main(String[] args){
 
         GestionnaireEcouteurs.enregistrerEcouteur(Jeu.getInstancePrincipale());
@@ -30,10 +31,10 @@ public class Jeu implements Ecouteur{
     public Jeu(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Saissisez le nom du joueur 1 (Blanc) : ");
-        joueurs.put(Couleur.BLANC, new Joueur(Couleur.BLANC, this));
+        joueurs.put(Couleur.BLANC, new IA(Couleur.BLANC, this));
         joueurs.get(Couleur.BLANC).setNom(scanner.nextLine());
         
-        //System.out.println("Saissisez le nom du joueur 2 (Noir) : ");
+        System.out.println("Saissisez le nom du joueur 2 (Noir) : ");
         joueurs.put(Couleur.NOIR, new IA(Couleur.NOIR, this));
         joueurs.get(Couleur.NOIR).setNom(scanner.nextLine());
 
@@ -141,6 +142,10 @@ public class Jeu implements Ecouteur{
      */
     public void mettreAJour(Position position){
 
+        if(!this.getEtatPartie()){
+            return;
+        }
+
         for(Couleur couleur : Couleur.values()){
             Plateau plateau = this.getPlateau();
             if(plateau.estLibre(position) || !plateau.getIntersection(position).equals(couleur)){
@@ -170,8 +175,9 @@ public class Jeu implements Ecouteur{
             */  
             for(int x = position.getX() - 1; x >= position.getX() - 4; x--){
                 Position pos = new Position(x, position.getY());
-                if(!plateau.estLibre(pos) && plateau.getIntersection(pos).equals(couleur)){
+                if(!plateau.estLibre(pos) && plateau.getIntersection(pos) != null && plateau.getIntersection(pos).equals(couleur)){
                     pierres++;
+                    System.out.println(pos.getX() + "; " + pos.getY());
                 }
                 else{
                     break;
@@ -182,7 +188,7 @@ public class Jeu implements Ecouteur{
             */
             for(int x = position.getX() + 1; x <= position.getX() + 4; x++){
                 Position pos = new Position(x, position.getY());
-                if(!plateau.estLibre(pos) && plateau.getIntersection(pos).equals(couleur)){
+                if(!plateau.estLibre(pos) && plateau.getIntersection(pos) != null && plateau.getIntersection(pos).equals(couleur)){
                     pierres++;
                 }
                 else{
@@ -205,7 +211,7 @@ public class Jeu implements Ecouteur{
             */
             for(int y = position.getY() + 1; y <= position.getY() + 4; y++){
                 Position pos = new Position(position.getX(), y);
-                if(!plateau.estLibre(pos) && plateau.getIntersection(pos).equals(couleur)){
+                if(!plateau.estLibre(pos) && plateau.getIntersection(pos) != null && plateau.getIntersection(pos).equals(couleur)){
                     pierres++;
                 }
                 else{
@@ -217,7 +223,7 @@ public class Jeu implements Ecouteur{
             */
             for(int y = position.getY() - 1; y >= position.getY() - 4; y--){
                 Position pos = new Position(position.getX(), y);
-                if(!plateau.estLibre(pos) && plateau.getIntersection(pos).equals(couleur)){
+                if(!plateau.estLibre(pos) && plateau.getIntersection(pos) != null && plateau.getIntersection(pos).equals(couleur)){
                     pierres++;
                 }
                 else{
@@ -242,7 +248,7 @@ public class Jeu implements Ecouteur{
             */
             for(int k = 1; k <= 4; k++){
                 Position pos = new Position(position.getX() - k, position.getY() - k);
-                if(!plateau.estLibre(pos) && plateau.getIntersection(pos).equals(couleur)){
+                if(!plateau.estLibre(pos) && plateau.getIntersection(pos) != null && plateau.getIntersection(pos).equals(couleur)){
                     pierres++;
                 }
                 else{
@@ -254,7 +260,7 @@ public class Jeu implements Ecouteur{
             */
             for(int k = 1; k <= 4; k++){
                 Position pos = new Position(position.getX() + k, position.getY() + k);
-                if(!plateau.estLibre(pos) && plateau.getIntersection(pos).equals(couleur)){
+                if(!plateau.estLibre(pos) && plateau.getIntersection(pos) != null && plateau.getIntersection(pos).equals(couleur)){
                     pierres++;
                 }
                 else{
@@ -277,7 +283,7 @@ public class Jeu implements Ecouteur{
             */
             for(int k = 1; k <= 4; k++){
                 Position pos = new Position(position.getX() + k, position.getY() - k);
-                if(!plateau.estLibre(pos) && plateau.getIntersection(pos).equals(couleur)){
+                if(!plateau.estLibre(pos) && plateau.getIntersection(pos) != null && plateau.getIntersection(pos).equals(couleur)){
                     pierres++;
                 }
                 else{
@@ -289,7 +295,7 @@ public class Jeu implements Ecouteur{
             */
             for(int k = 1; k <= 4; k++){
                 Position pos = new Position(position.getX() - k, position.getY() + k);
-                if(!plateau.estLibre(pos) && plateau.getIntersection(pos).equals(couleur)){
+                if(!plateau.estLibre(pos) && plateau.getIntersection(pos) != null && plateau.getIntersection(pos).equals(couleur)){
                     pierres++;
                 }
                 else{
@@ -325,6 +331,7 @@ public class Jeu implements Ecouteur{
 
     public void terminerPartie(){
         System.out.println("Partie terminée");
+        this.setEtatPartie(false);
         getInterfaceGraphique().getBordure1().setVisible(false);
         getInterfaceGraphique().getBordure2().setVisible(false);   
     }
@@ -355,6 +362,14 @@ public class Jeu implements Ecouteur{
 
     public HashMap<Couleur, Joueur> getJoueurs(){
         return this.joueurs;
+    }
+
+    public void setEtatPartie(boolean bool){
+        this.etatPartie = bool;
+    }
+
+    public boolean getEtatPartie(){
+        return this.etatPartie;
     }
 
     public static Jeu getInstancePrincipale(){

@@ -20,11 +20,11 @@ public class IA2 extends IA{
         for (int x=0; x<19;x++) {
             for (int y=0; y<19;y++) {
                 position = new Position(x,y);
-                libre = Jeu.getInstancePrincipale().getPlateau().estLibre(position);
-                if(libre == false && Jeu.getInstancePrincipale().getPlateau().getIntersection(position) != this.getCouleur()){
+                libre = this.getJeu().getPlateau().estLibre(position);
+                if(libre == false && this.getJeu().getPlateau().getIntersection(position) != this.getCouleur()){
                     for(int a=x; a< a + 3; a++){
                         positiontest = new Position(a,y);
-                        if(Jeu.getInstancePrincipale().getPlateau().estLibre(positiontest) == false && Jeu.getInstancePrincipale().getPlateau().getIntersection(position) != this.getCouleur()){
+                        if(this.getJeu().getPlateau().estLibre(positiontest) == false && this.getJeu().getPlateau().getIntersection(position) != this.getCouleur()){
                             suite++;
                             if(suite == 4){
                                 place = 1;
@@ -34,7 +34,7 @@ public class IA2 extends IA{
                     suite = 1;
                     for(int a=x; a > a - 3; a--){
                         positiontest = new Position(a,y);
-                        if(Jeu.getInstancePrincipale().getPlateau().estLibre(positiontest) == false && Jeu.getInstancePrincipale().getPlateau().getIntersection(position) != this.getCouleur()){
+                        if(this.getJeu().getPlateau().estLibre(positiontest) == false && this.getJeu().getPlateau().getIntersection(position) != this.getCouleur()){
                             suite = suite + 1;
                             if(suite == 4){
                                 place = 2;
@@ -44,7 +44,7 @@ public class IA2 extends IA{
                     suite = 1;
                     for(int a=y; a< a + 3; a++){
                         positiontest = new Position(a,y);
-                        if(Jeu.getInstancePrincipale().getPlateau().estLibre(positiontest) == false && Jeu.getInstancePrincipale().getPlateau().getIntersection(position) != this.getCouleur()){
+                        if(this.getJeu().getPlateau().estLibre(positiontest) == false && this.getJeu().getPlateau().getIntersection(position) != this.getCouleur()){
                             suite++;
                             if(suite == 4){
                                 place = 3;
@@ -54,7 +54,7 @@ public class IA2 extends IA{
                     suite = 1;
                     for(int a=x; a > a - 3; a--){
                         positiontest = new Position(a,y);
-                        if(Jeu.getInstancePrincipale().getPlateau().estLibre(positiontest) == false && Jeu.getInstancePrincipale().getPlateau().getIntersection(position) != this.getCouleur()){
+                        if(this.getJeu().getPlateau().estLibre(positiontest) == false && this.getJeu().getPlateau().getIntersection(position) != this.getCouleur()){
                             suite = suite + 1;
                             if(suite == 4){
                                 place = 4;
