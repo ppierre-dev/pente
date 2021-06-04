@@ -147,7 +147,7 @@ public class Jeu implements Ecouteur{
 
         /*
             Passer au joueur suivant
-         */
+        */
         if(this.getTourJoueur().equals(Couleur.BLANC)){
             this.setTourJoueur(Couleur.NOIR);
         }
