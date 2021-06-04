@@ -95,6 +95,82 @@ public class IA2 extends IA{
                             }
                         }
                     }
+
+                    if(positioninit.getX() > 0 && positioninit.getY() > 0){
+                        position = new Position(
+                        positioninit.getX() - 1,
+                        positioninit.getY() - 1
+                        );
+                        if(this.getJeu().getPlateau().estLibre(position) == false && this.getJeu().getPlateau().getIntersection(position) != this.getCouleur() && this.getJeu().getPlateau().getIntersection(position) != null){
+                            if(positioninit.getX() > 0 && positioninit.getY() > 0){
+                                position = new Position(
+                                position.getX() - 1,
+                                position.getY() - 1
+                                );
+                                if(this.getJeu().getPlateau().estLibre(position) == true){
+                                    fini = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    if(positioninit.getX() < Plateau.DIMENSION && positioninit.getY() < Plateau.DIMENSION){
+                        position = new Position(
+                        positioninit.getX() + 1,
+                        positioninit.getY() + 1
+                        );
+                        if(this.getJeu().getPlateau().estLibre(position) == false && this.getJeu().getPlateau().getIntersection(position) != this.getCouleur() && this.getJeu().getPlateau().getIntersection(position) != null){
+                            if(positioninit.getX() < Plateau.DIMENSION && positioninit.getY() < Plateau.DIMENSION){
+                                position = new Position(
+                                position.getX() + 1,
+                                position.getY() + 1
+                                );
+                                if(this.getJeu().getPlateau().estLibre(position) == true){
+                                    fini = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    if(positioninit.getX() > 0 && positioninit.getY() < Plateau.DIMENSION){
+                        position = new Position(
+                        positioninit.getX() - 1,
+                        positioninit.getY() + 1
+                        );
+                        if(this.getJeu().getPlateau().estLibre(position) == false && this.getJeu().getPlateau().getIntersection(position) != this.getCouleur() && this.getJeu().getPlateau().getIntersection(position) != null){
+                            if(positioninit.getX() > 0 && positioninit.getY() < Plateau.DIMENSION){
+                                position = new Position(
+                                position.getX() - 1,
+                                position.getY() + 1
+                                );
+                                if(this.getJeu().getPlateau().estLibre(position) == true){
+                                    fini = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    
+                    if(positioninit.getX() < Plateau.DIMENSION && positioninit.getY() > 0){
+                        position = new Position(
+                        positioninit.getX() + 1,
+                        positioninit.getY() - 1
+                        );
+                        if(this.getJeu().getPlateau().estLibre(position) == false && this.getJeu().getPlateau().getIntersection(position) != this.getCouleur() && this.getJeu().getPlateau().getIntersection(position) != null){
+                            if(positioninit.getX() < Plateau.DIMENSION && positioninit.getY() > 0){
+                                position = new Position(
+                                position.getX() + 1,
+                                position.getY() - 1
+                                );
+                                if(this.getJeu().getPlateau().estLibre(position) == true){
+                                    fini = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         if(fini == true){
