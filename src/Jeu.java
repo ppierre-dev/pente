@@ -193,6 +193,7 @@ public class Jeu implements Ecouteur{
 
             if(pierres >= 4){
                 this.terminerPartie();
+                this.getInterfaceGraphique().getBordure1().setVisible(false);
             }
 
 
@@ -253,6 +254,8 @@ public class Jeu implements Ecouteur{
 
     public void terminerPartie(){
         System.out.println("Partie terminée");
+        getInterfaceGraphique().getBordure1().setVisible(false);
+        getInterfaceGraphique().getBordure2().setVisible(false);   
     }
 
 

@@ -13,6 +13,9 @@ public class InterfaceGraphique extends JFrame{
     private CadreInformation cadreInformationBlanc;
     private CadreInformation cadreInformationNoir;
     private Jeu jeu;
+    private BordureInterface bordure1;
+    private BordureInterface bordure2;
+
     
     /**
      * Constructeur
@@ -50,12 +53,14 @@ public class InterfaceGraphique extends JFrame{
         */
 
         BordureInterface bordure1 = new BordureInterface();
+        this.setBordure1(bordure1);
         bordure1.setSize(1, 690);
         bordure1.setLocation(750, 30);
         bordure1.repaint();
         this.add(bordure1);
 
         BordureInterface bordure2 = new BordureInterface();
+        this.setBordure2(bordure2);
         bordure2.setSize(490, 1);
         bordure2.setLocation(780, 370);
         bordure2.repaint();
@@ -105,4 +110,21 @@ public class InterfaceGraphique extends JFrame{
     private Jeu getJeu(){
         return this.jeu;
     }
+
+    public void setBordure1(BordureInterface bordure1){
+        this.bordure1 = bordure1;
+    }
+    
+    public BordureInterface getBordure1(){
+        return bordure1;
+    }
+    
+    public void setBordure2(BordureInterface bordure2){
+        this.bordure2 = bordure2;
+    }
+
+    public BordureInterface getBordure2(){
+        return bordure2;
+    }
+
 }
