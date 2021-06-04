@@ -24,5 +24,4 @@ public class IA extends Joueur{
         }
         return position;
     }
-
 }

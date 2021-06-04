@@ -175,7 +175,6 @@ public class Jeu implements Ecouteur{
                     break;
                 }
             }
-
             /* 
                 droite
             */
@@ -188,9 +187,6 @@ public class Jeu implements Ecouteur{
                     break;
                 }
             }
-
-
-
             if(pierres >= 4){
                 this.terminerPartie();
                 this.getInterfaceGraphique().getBordure1().setVisible(false);
@@ -214,7 +210,6 @@ public class Jeu implements Ecouteur{
                     break;
                 }
             }
-
             /* 
                 bas
             */
@@ -227,9 +222,78 @@ public class Jeu implements Ecouteur{
                     break;
                 }
             }
+            if(pierres >= 4){
+                this.terminerPartie();
+            }
 
 
-            
+
+
+
+
+            /* 
+                Test alignement diagonale en "\"
+            */
+            pierres = 0;
+            /*
+                haut à gauche
+            */
+            for(int k = 1; k <= 4; k++){
+                Position pos = new Position(position.getX() - k, position.getY() - k);
+                if(!plateau.estLibre(pos) && plateau.getIntersection(pos).equals(couleur)){
+                    pierres++;
+                }
+                else{
+                    break;
+                }
+            }
+            /*
+                bas à droite
+            */
+            for(int k = 1; k <= 4; k++){
+                Position pos = new Position(position.getX() + k, position.getY() + k);
+                if(!plateau.estLibre(pos) && plateau.getIntersection(pos).equals(couleur)){
+                    pierres++;
+                }
+                else{
+                    break;
+                }
+            }
+            if(pierres >= 4){
+                this.terminerPartie();
+            }
+
+
+
+
+            /* 
+                Test alignement diagonale en "/"
+            */
+            pierres = 0;
+            /*
+                haut à droite
+            */
+            for(int k = 1; k <= 4; k++){
+                Position pos = new Position(position.getX() + k, position.getY() - k);
+                if(!plateau.estLibre(pos) && plateau.getIntersection(pos).equals(couleur)){
+                    pierres++;
+                }
+                else{
+                    break;
+                }
+            }
+            /*
+                bas à gauche
+            */
+            for(int k = 1; k <= 4; k++){
+                Position pos = new Position(position.getX() - k, position.getY() + k);
+                if(!plateau.estLibre(pos) && plateau.getIntersection(pos).equals(couleur)){
+                    pierres++;
+                }
+                else{
+                    break;
+                }
+            }
             if(pierres >= 4){
                 this.terminerPartie();
             }
