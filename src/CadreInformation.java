@@ -10,6 +10,7 @@ public class CadreInformation extends JPanel{
     private JLabel labelNomJoueur;
     private JLabel labelCouleurJoueur;
     private JLabel pions;
+    private JLabel prises;
     private JLabel jouer;
     private JButton annuler;
 
@@ -49,6 +50,16 @@ public class CadreInformation extends JPanel{
         this.getLabelPionsJoueur().repaint();
         this.getLabelPionsJoueur().setFont(new Font("Yu Gothic", Font.BOLD, 18));
         this.getLabelPionsJoueur().setForeground(Color.GRAY);
+
+        JLabel prises = new JLabel();
+        this.setLabelPrisesJoueur(prises);
+        this.add(this.getLabelPrisesJoueur());
+        this.getLabelPrisesJoueur().setSize(500, 50);
+        this.getLabelPrisesJoueur().setLocation(0, 120);
+        this.getLabelPrisesJoueur().validate();
+        this.getLabelPrisesJoueur().repaint();
+        this.getLabelPrisesJoueur().setFont(new Font("Yu Gothic", Font.BOLD, 18));
+        this.getLabelPrisesJoueur().setForeground(Color.GRAY);
 
         JLabel jouer = new JLabel();
         this.setLabelJouerJoueur(jouer);
@@ -109,6 +120,14 @@ public class CadreInformation extends JPanel{
         return this.pions;
     }
 
+    public void setLabelPrisesJoueur(JLabel prises) {
+        this.prises = prises;
+    }
+
+    public JLabel getLabelPrisesJoueur() {
+        return this.prises;
+    }
+
     public void setLabelJouerJoueur(JLabel jouer) {
         this.jouer = jouer;
     }
@@ -143,6 +162,14 @@ public class CadreInformation extends JPanel{
 
     public String getPions(){
         return this.getLabelPionsJoueur().getText();
+    }
+
+    public void setPrises(String prises){
+        this.getLabelPrisesJoueur().setText(prises + " prise(s) effectuée(s)");
+    }
+
+    public String getPrises(){
+        return this.getLabelPrisesJoueur().getText();
     }
 
 }

@@ -81,6 +81,9 @@ public class Jeu implements Ecouteur{
 
         this.interfaceGraphique.getCadreInformationBlanc().setPions(String.valueOf(Joueur.MAX_PIONS - this.joueurs.get(Couleur.BLANC).getNombrePions()));
         this.interfaceGraphique.getCadreInformationNoir().setPions(String.valueOf(Joueur.MAX_PIONS - this.joueurs.get(Couleur.NOIR).getNombrePions()));
+    
+        this.interfaceGraphique.getCadreInformationBlanc().setPrises(String.valueOf(this.joueurs.get(Couleur.BLANC).getPairesPrises()));
+        this.interfaceGraphique.getCadreInformationNoir().setPrises(String.valueOf(this.joueurs.get(Couleur.NOIR).getPairesPrises()));
     }
 
 
@@ -167,7 +170,7 @@ public class Jeu implements Ecouteur{
             this.testerAlignement(position, couleur, -1, 0); /* Horizontale gauche */
             this.testerAlignement(position, couleur, 1, 0);  /* Horizontale droite */
             this.testerAlignement(position, couleur, 0, -1); /* Verticale haut */
-            this.testerAlignement(position, couleur, 0, -1); /* Verticale bas */
+            this.testerAlignement(position, couleur, 0, 1); /* Verticale bas */
             this.testerAlignement(position, couleur, -1, -1); /* Diagonale haut-gauche */
             this.testerAlignement(position, couleur, 1, -1); /* Diagonale haut-droite */
             this.testerAlignement(position, couleur, -1, 1); /* Diagonale bas-gauche */
@@ -182,7 +185,7 @@ public class Jeu implements Ecouteur{
             this.testerPrise(position, couleur, -1, 0); /* Horizontale gauche */
             this.testerPrise(position, couleur, 1, 0);  /* Horizontale droite */
             this.testerPrise(position, couleur, 0, -1); /* Verticale haut */
-            this.testerPrise(position, couleur, 0, -1); /* Verticale bas */
+            this.testerPrise(position, couleur, 0, 1); /* Verticale bas */
             this.testerPrise(position, couleur, -1, -1); /* Diagonale haut-gauche */
             this.testerPrise(position, couleur, 1, -1); /* Diagonale haut-droite */
             this.testerPrise(position, couleur, -1, 1); /* Diagonale bas-gauche */
