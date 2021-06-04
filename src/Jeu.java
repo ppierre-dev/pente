@@ -33,8 +33,8 @@ public class Jeu implements Ecouteur{
         joueurs.put(Couleur.BLANC, new Joueur(Couleur.BLANC, this));
         joueurs.get(Couleur.BLANC).setNom(scanner.nextLine());
         
-        System.out.println("Saissisez le nom du joueur 2 (Noir) : ");
-        joueurs.put(Couleur.NOIR, new Joueur(Couleur.NOIR, this));
+        //System.out.println("Saissisez le nom du joueur 2 (Noir) : ");
+        joueurs.put(Couleur.NOIR, new IA(Couleur.NOIR, this));
         joueurs.get(Couleur.NOIR).setNom(scanner.nextLine());
 
         double random = Math.random();
@@ -310,6 +310,11 @@ public class Jeu implements Ecouteur{
         }
         else{
             this.setTourJoueur(Couleur.BLANC);
+        }
+
+        if(this.getJoueur(this.getTourJoueur()) instanceof IA){
+            IA ia = (IA) this.getJoueur(this.getTourJoueur());
+            ia.poserPion(ia.calculerCoup());
         }
         this.afficherInformations();
     }
