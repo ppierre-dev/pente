@@ -7,6 +7,7 @@ public class IA extends Joueur{
         super(couleur, jeu);
     }
 
+    //Methode crée par Peepoodoo et Tchoupi (Valentin et Etienne)
     public Position calculerCoup(){
         boolean libre;
         Position position;

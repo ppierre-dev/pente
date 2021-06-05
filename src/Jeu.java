@@ -36,7 +36,7 @@ public class Jeu{
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Saissisez le nom du joueur 1 (Blanc) : ");
-        joueurs.put(Couleur.BLANC, new Joueur(Couleur.BLANC, this));
+        joueurs.put(Couleur.BLANC, new IA2(Couleur.BLANC, this));
         joueurs.get(Couleur.BLANC).setNom(scanner.nextLine());
         
         System.out.println("Saissisez le nom du joueur 2 (Noir) : ");
@@ -205,7 +205,7 @@ public class Jeu{
             }
         }
         if(pierres >= 4){
-            this.terminerPartie();
+            this.terminerPartie(couleur);
         }
     }
 
@@ -227,7 +227,8 @@ public class Jeu{
                         this.getJoueur(couleurPreneur).incrementerPairesPrises();
 
                         if(this.getJoueur(couleurPreneur).getPairesPrises() >= 5){
-                            this.terminerPartie();
+                            System.out.println((this.getJoueur(couleurPreneur)));
+                            this.terminerPartie(couleurPreneur);
                         }
                     }
                 }
@@ -237,11 +238,19 @@ public class Jeu{
 
 
 
-    public void terminerPartie(){
+    public void terminerPartie(Couleur couleur){
         System.out.println("Partie terminée");
         this.setEtatPartie(false);
-        getInterfaceGraphique().getBordure1().setVisible(false);
-        getInterfaceGraphique().getBordure2().setVisible(false);   
+        getInterfaceGraphique().getCadreInformationBlanc().getLabelNomJoueur().setVisible(false);
+        getInterfaceGraphique().getCadreInformationNoir().getLabelNomJoueur().setVisible(false);
+        getInterfaceGraphique().getCadreInformationBlanc().getLabelJouerJoueur().setText("");
+        getInterfaceGraphique().getCadreInformationNoir().getLabelJouerJoueur().setText("");
+        getInterfaceGraphique().getCadreInformationBlanc().getLabelCouleurJoueur().setVisible(false);
+        getInterfaceGraphique().getCadreInformationNoir().getLabelCouleurJoueur().setVisible(false);
+        getInterfaceGraphique().getCadreInformationNoir().getLabelPionsJoueur().setVisible(false);
+        getInterfaceGraphique().getCadreInformationBlanc().getLabelPionsJoueur().setVisible(false);
+        getInterfaceGraphique().getCadreInformationBlanc().getLabelPrisesJoueur().setVisible(false);
+        getInterfaceGraphique().getCadreInformationNoir().getLabelPrisesJoueur().setVisible(false);
     }
 
 

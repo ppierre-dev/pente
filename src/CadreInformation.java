@@ -13,6 +13,7 @@ public class CadreInformation extends JPanel{
     private JLabel prises;
     private JLabel jouer;
     private JButton annuler;
+    private JLabel win;
 
     /**
      * Constructeur
@@ -178,5 +179,18 @@ public class CadreInformation extends JPanel{
     public String getPrises(){
         return this.getLabelPrisesJoueur().getText();
     }
+
+
+
+
+    public void setLabelWin(JLabel win) {
+        this.win = win;
+    }
+
+    public JLabel getLabelWin() {
+        return this.win;
+    }
+
+
 
 }

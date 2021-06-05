@@ -13,6 +13,7 @@ public class InterfaceGraphique extends JFrame{
     private Canvas canvas;
     private CadreInformation cadreInformationBlanc;
     private CadreInformation cadreInformationNoir;
+    private CadreInformation cadreInformationWin;
     private BordureInterface bordure1;
     private BordureInterface bordure2;
     private Jeu jeu;
@@ -44,6 +45,7 @@ public class InterfaceGraphique extends JFrame{
         this.add(this.getCadreInformationNoir());
         this.getCadreInformationNoir().setLocation(780, 400);
         this.getCadreInformationNoir().repaint();
+
 
         /*
         this.setLabelNom1(new JLabel());
@@ -87,6 +89,7 @@ public class InterfaceGraphique extends JFrame{
     public void setCadreInformationNoir(CadreInformation cadre) {
         this.cadreInformationNoir = cadre;
     }
+
 
     /**
      * Obtenir le canvas de l'interface graphique
