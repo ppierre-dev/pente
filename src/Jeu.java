@@ -248,6 +248,7 @@ public class Jeu implements Ecouteur{
                         this.getJoueur(couleurPreneur).incrementerPairesPrises();
 
                         if(this.getJoueur(couleurPreneur).getPairesPrises() >= 5){
+                            System.out.println((this.getJoueur(couleurPreneur)));
                             this.terminerPartie();
                         }
                     }
@@ -261,8 +262,6 @@ public class Jeu implements Ecouteur{
     public void terminerPartie(){
         System.out.println("Partie terminée");
         this.setEtatPartie(false);
-        getInterfaceGraphique().getBordure1().setVisible(false);
-        getInterfaceGraphique().getBordure2().setVisible(false);   
         getInterfaceGraphique().getCadreInformationBlanc().getLabelNomJoueur().setVisible(false);
         getInterfaceGraphique().getCadreInformationNoir().getLabelNomJoueur().setVisible(false);
         getInterfaceGraphique().getCadreInformationBlanc().getLabelJouerJoueur().setText("");

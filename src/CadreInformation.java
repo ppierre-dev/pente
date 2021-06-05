@@ -13,6 +13,7 @@ public class CadreInformation extends JPanel{
     private JLabel prises;
     private JLabel jouer;
     private JButton annuler;
+    private JLabel win;
 
     /**
      * Constructeur
@@ -73,6 +74,20 @@ public class CadreInformation extends JPanel{
         this.getLabelJouerJoueur().setHorizontalAlignment(SwingConstants.CENTER);
         this.getLabelJouerJoueur().setForeground(Color.GREEN);
         this.getLabelJouerJoueur().setVisible(false);
+
+
+        JLabel win = new JLabel();
+        this.setLabelWin(win);
+        this.add(this.getLabelWin());
+        this.getLabelWin().setSize(500, 50);
+        this.getLabelWin().setLocation(0, 280);
+        this.getLabelWin().setText("VAINQUEUR");
+        this.getLabelWin().validate();
+        this.getLabelWin().repaint();
+        this.getLabelWin().setFont(new Font("Yu Gothic", Font.BOLD, 18));
+        this.getLabelWin().setHorizontalAlignment(SwingConstants.CENTER);
+        this.getLabelWin().setForeground(Color.RED);
+        this.getLabelWin().setVisible(false);
 
         /*JButton annuler = new JButton();
         this.setButtonAnnuler(annuler);*/
@@ -171,5 +186,18 @@ public class CadreInformation extends JPanel{
     public String getPrises(){
         return this.getLabelPrisesJoueur().getText();
     }
+
+
+
+
+    public void setLabelWin(JLabel win) {
+        this.win = win;
+    }
+
+    public JLabel getLabelWin() {
+        return this.win;
+    }
+
+
 
 }
