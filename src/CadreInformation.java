@@ -184,7 +184,7 @@ public class CadreInformation extends JPanel{
     }
 
     public void setPrises(String prises){
-        this.getLabelPrisesJoueur().setText(prises + " prise(s) effectuée(s)");
+        this.getLabelPrisesJoueur().setText(prises + " prise(s) effectu\u00e9e(s)");
     }
 
     public String getPrises(){

@@ -95,7 +95,7 @@ public class Jeu{
 
     public void enregistrerEtat(){
         this.getHistoriqueEtats().add(new EtatJeu(this));
-        System.out.println("enregistrés: " + this.getHistoriqueEtats().size());
+        System.out.println("enregistr\u00e9s: " + this.getHistoriqueEtats().size());
     }
 
     public void revenirEtatPrecedent(){
@@ -108,7 +108,7 @@ public class Jeu{
             this.setEtatPartie(etatJeu.getEtatPartie());
 
             this.getHistoriqueEtats().remove(this.getHistoriqueEtats().size() - 1);
-            System.out.println("Coup annulé: " + this.getHistoriqueEtats().size());
+            System.out.println("Coup annul\u00e9: " + this.getHistoriqueEtats().size());
 
             if(this.getJoueur(this.getTourJoueur()) instanceof IA){
                 IA ia = (IA) this.getJoueur(this.getTourJoueur());
@@ -116,7 +116,7 @@ public class Jeu{
             }
         }
         else{
-            System.out.println("Pas de coup précédent");
+            System.out.println("Pas de coup pr\u00e9c\u00e9dent");
         }
     }
 
@@ -243,7 +243,7 @@ public class Jeu{
 
 
     public void terminerPartie(Couleur couleur){
-        System.out.println("Partie terminée");
+        System.out.println("Partie termin\u00e9e");
         this.setEtatPartie(false);
         System.out.println(couleur);
         if(couleur.equals(Couleur.NOIR)){
