@@ -263,6 +263,16 @@ public class Jeu implements Ecouteur{
         this.setEtatPartie(false);
         getInterfaceGraphique().getBordure1().setVisible(false);
         getInterfaceGraphique().getBordure2().setVisible(false);   
+        getInterfaceGraphique().getCadreInformationBlanc().getLabelNomJoueur().setVisible(false);
+        getInterfaceGraphique().getCadreInformationNoir().getLabelNomJoueur().setVisible(false);
+        getInterfaceGraphique().getCadreInformationBlanc().getLabelJouerJoueur().setText("");
+        getInterfaceGraphique().getCadreInformationNoir().getLabelJouerJoueur().setText("");
+        getInterfaceGraphique().getCadreInformationBlanc().getLabelCouleurJoueur().setVisible(false);
+        getInterfaceGraphique().getCadreInformationNoir().getLabelCouleurJoueur().setVisible(false);
+        getInterfaceGraphique().getCadreInformationNoir().getLabelPionsJoueur().setVisible(false);
+        getInterfaceGraphique().getCadreInformationBlanc().getLabelPionsJoueur().setVisible(false);
+        getInterfaceGraphique().getCadreInformationBlanc().getLabelPrisesJoueur().setVisible(false);
+        getInterfaceGraphique().getCadreInformationNoir().getLabelPrisesJoueur().setVisible(false);
     }
 
 
