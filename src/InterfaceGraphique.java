@@ -13,7 +13,6 @@ public class InterfaceGraphique extends JFrame{
     private Canvas canvas;
     private CadreInformation cadreInformationBlanc;
     private CadreInformation cadreInformationNoir;
-    private CadreInformation cadreInformationWin;
     private BordureInterface bordure1;
     private BordureInterface bordure2;
     private Jeu jeu;

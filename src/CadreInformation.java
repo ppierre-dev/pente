@@ -73,7 +73,21 @@ public class CadreInformation extends JPanel{
         this.getLabelJouerJoueur().setHorizontalAlignment(SwingConstants.CENTER);
         this.getLabelJouerJoueur().setVisible(true);
 
+
+        JLabel win = new JLabel();
+        this.setLabelWin(win);
+        this.add(this.getLabelWin());
+        this.getLabelWin().setSize(500, 50);
+        this.getLabelWin().setLocation(0, 280);
+        this.getLabelWin().validate();
+        this.getLabelWin().repaint();
+        this.getLabelWin().setFont(new Font("Yu Gothic", Font.BOLD, 18));
+        this.getLabelWin().setHorizontalAlignment(SwingConstants.CENTER);
+        this.getLabelWin().setVisible(false);
+
+
         this.afficherMessageJouer();
+        this.afficherMessageWin();
 
         this.setVisible(true);
     }
@@ -87,6 +101,12 @@ public class CadreInformation extends JPanel{
         this.getLabelJouerJoueur().setForeground(Color.RED);
         this.getLabelJouerJoueur().setText("Annuler via clique droit sur le plateau");
     }
+
+    public void afficherMessageWin(){
+        this.getLabelWin().setForeground(Color.RED);
+        this.getLabelWin().setText("VAINQUEUR");
+    }
+
 
     /**
      * Obtenir le label du nom du joueur
@@ -190,7 +210,5 @@ public class CadreInformation extends JPanel{
     public JLabel getLabelWin() {
         return this.win;
     }
-
-
 
 }
