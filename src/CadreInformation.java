@@ -12,7 +12,6 @@ public class CadreInformation extends JPanel{
     private JLabel pions;
     private JLabel prises;
     private JLabel jouer;
-    private JButton annuler;
     private JLabel win;
 
     /**
@@ -162,14 +161,6 @@ public class CadreInformation extends JPanel{
 
     public JLabel getLabelJouerJoueur() {
         return this.jouer;
-    }
-
-    public JButton getButtonAnnuler(){
-        return this.annuler;
-    }
-
-    public void setButtonAnnuler(JButton annuler){
-        this.annuler = annuler;
     }
 
     public String getNom(){

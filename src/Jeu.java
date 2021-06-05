@@ -109,6 +109,11 @@ public class Jeu{
 
             this.getHistoriqueEtats().remove(this.getHistoriqueEtats().size() - 1);
             System.out.println("Coup annulé: " + this.getHistoriqueEtats().size());
+
+            if(this.getJoueur(this.getTourJoueur()) instanceof IA){
+                IA ia = (IA) this.getJoueur(this.getTourJoueur());
+                ia.poserPion(ia.calculerCoup());
+            }
         }
         else{
             System.out.println("Pas de coup précédent");
