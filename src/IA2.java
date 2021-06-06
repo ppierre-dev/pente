@@ -17,15 +17,14 @@ public class IA2 extends IA{
         for (int x=0; x<19;x++){
             for (int y=0; y<19;y++){
                 positioninit = new Position(x,y);
-                if(this.getJeu().getPlateau().estLibre(positioninit) == false && this.getJeu().getPlateau().getIntersection(positioninit) != this.getCouleur() && this.getJeu().getPlateau().getIntersection(positioninit) != null){
-                    
+                if(this.getJeu().getPlateau().estLibre(positioninit) == false && this.getJeu().getPlateau().getIntersection(positioninit) == this.getCouleur()){
                     
                     if(positioninit.getX() < Plateau.DIMENSION){
                         position = new Position(
                         positioninit.getX() + 1,
                         positioninit.getY()
                         );
-                        if(this.getJeu().getPlateau().estLibre(position) == false && this.getJeu().getPlateau().getIntersection(position) != this.getCouleur() && this.getJeu().getPlateau().getIntersection(position) != null){
+                        if(this.getJeu().getPlateau().estLibre(position) == false && this.getJeu().getPlateau().getIntersection(position) == this.getCouleur() && this.getJeu().getPlateau().getIntersection(position) != null){
                             if(position.getX() < Plateau.DIMENSION){
                                 position = new Position(
                                 position.getX() + 1,
@@ -44,7 +43,7 @@ public class IA2 extends IA{
                         positioninit.getX() - 1,
                         positioninit.getY()
                         );
-                        if(this.getJeu().getPlateau().estLibre(position) == false && this.getJeu().getPlateau().getIntersection(position) != this.getCouleur() && this.getJeu().getPlateau().getIntersection(position) != null){
+                        if(this.getJeu().getPlateau().estLibre(position) == false && this.getJeu().getPlateau().getIntersection(position) == this.getCouleur() && this.getJeu().getPlateau().getIntersection(position) != null){
                             if(position.getX() > 0){
                                 position = new Position(
                                 position.getX() - 1,
@@ -63,7 +62,7 @@ public class IA2 extends IA{
                         positioninit.getX(),
                         positioninit.getY() + 1
                         );
-                        if(this.getJeu().getPlateau().estLibre(position) == false && this.getJeu().getPlateau().getIntersection(position) != this.getCouleur() && this.getJeu().getPlateau().getIntersection(position) != null){
+                        if(this.getJeu().getPlateau().estLibre(position) == false && this.getJeu().getPlateau().getIntersection(position) == this.getCouleur() && this.getJeu().getPlateau().getIntersection(position) != null){
                             if(positioninit.getY() < Plateau.DIMENSION){
                                 position = new Position(
                                 position.getX(),
@@ -82,7 +81,7 @@ public class IA2 extends IA{
                         positioninit.getX(),
                         positioninit.getY() - 1
                         );
-                        if(this.getJeu().getPlateau().estLibre(position) == false && this.getJeu().getPlateau().getIntersection(position) != this.getCouleur() && this.getJeu().getPlateau().getIntersection(position) != null){
+                        if(this.getJeu().getPlateau().estLibre(position) == false && this.getJeu().getPlateau().getIntersection(position) == this.getCouleur() && this.getJeu().getPlateau().getIntersection(position) != null){
                             if(positioninit.getY() > 0){
                                 position = new Position(
                                 position.getX(),
@@ -101,7 +100,7 @@ public class IA2 extends IA{
                         positioninit.getX() - 1,
                         positioninit.getY() - 1
                         );
-                        if(this.getJeu().getPlateau().estLibre(position) == false && this.getJeu().getPlateau().getIntersection(position) != this.getCouleur() && this.getJeu().getPlateau().getIntersection(position) != null){
+                        if(this.getJeu().getPlateau().estLibre(position) == false && this.getJeu().getPlateau().getIntersection(position) == this.getCouleur() && this.getJeu().getPlateau().getIntersection(position) != null){
                             if(positioninit.getX() > 0 && positioninit.getY() > 0){
                                 position = new Position(
                                 position.getX() - 1,
@@ -120,7 +119,7 @@ public class IA2 extends IA{
                         positioninit.getX() + 1,
                         positioninit.getY() + 1
                         );
-                        if(this.getJeu().getPlateau().estLibre(position) == false && this.getJeu().getPlateau().getIntersection(position) != this.getCouleur() && this.getJeu().getPlateau().getIntersection(position) != null){
+                        if(this.getJeu().getPlateau().estLibre(position) == false && this.getJeu().getPlateau().getIntersection(position) == this.getCouleur() && this.getJeu().getPlateau().getIntersection(position) != null){
                             if(positioninit.getX() < Plateau.DIMENSION && positioninit.getY() < Plateau.DIMENSION){
                                 position = new Position(
                                 position.getX() + 1,
@@ -139,7 +138,7 @@ public class IA2 extends IA{
                         positioninit.getX() - 1,
                         positioninit.getY() + 1
                         );
-                        if(this.getJeu().getPlateau().estLibre(position) == false && this.getJeu().getPlateau().getIntersection(position) != this.getCouleur() && this.getJeu().getPlateau().getIntersection(position) != null){
+                        if(this.getJeu().getPlateau().estLibre(position) == false && this.getJeu().getPlateau().getIntersection(position) == this.getCouleur() && this.getJeu().getPlateau().getIntersection(position) != null){
                             if(positioninit.getX() > 0 && positioninit.getY() < Plateau.DIMENSION){
                                 position = new Position(
                                 position.getX() - 1,
@@ -158,7 +157,7 @@ public class IA2 extends IA{
                         positioninit.getX() + 1,
                         positioninit.getY() - 1
                         );
-                        if(this.getJeu().getPlateau().estLibre(position) == false && this.getJeu().getPlateau().getIntersection(position) != this.getCouleur() && this.getJeu().getPlateau().getIntersection(position) != null){
+                        if(this.getJeu().getPlateau().estLibre(position) == false && this.getJeu().getPlateau().getIntersection(position) == this.getCouleur() && this.getJeu().getPlateau().getIntersection(position) != null){
                             if(positioninit.getX() < Plateau.DIMENSION && positioninit.getY() > 0){
                                 position = new Position(
                                 position.getX() + 1,
@@ -181,5 +180,7 @@ public class IA2 extends IA{
             position = super.calculerCoup();
         }
         return position;
+
+        
     }
 }
