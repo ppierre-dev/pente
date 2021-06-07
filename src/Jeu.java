@@ -36,7 +36,7 @@ public class Jeu{
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Saissisez le nom du joueur 1 (Blanc) : ");
-        joueurs.put(Couleur.BLANC, new IA4(Couleur.BLANC, this));
+        joueurs.put(Couleur.BLANC, new IABloque(Couleur.BLANC, this));
         joueurs.get(Couleur.BLANC).setNom(scanner.nextLine());
         
         System.out.println("Saissisez le nom du joueur 2 (Noir) : ");
