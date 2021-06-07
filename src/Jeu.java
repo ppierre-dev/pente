@@ -40,7 +40,7 @@ public class Jeu{
         joueurs.get(Couleur.BLANC).setNom(scanner.nextLine());
         
         System.out.println("Saissisez le nom du joueur 2 (Noir) : ");
-        joueurs.put(Couleur.NOIR, new Joueur(Couleur.NOIR, this));
+        joueurs.put(Couleur.NOIR, new IABloque(Couleur.NOIR, this));
         joueurs.get(Couleur.NOIR).setNom(scanner.nextLine());
 
         double random = Math.random();
@@ -89,13 +89,14 @@ public class Jeu{
     
         this.interfaceGraphique.getCadreInformationBlanc().setPrises(String.valueOf(this.joueurs.get(Couleur.BLANC).getPairesPrises()));
         this.interfaceGraphique.getCadreInformationNoir().setPrises(String.valueOf(this.joueurs.get(Couleur.NOIR).getPairesPrises()));
+    
+        this.getInterfaceGraphique().getCanvas().repaint();
     }
 
 
 
     public void enregistrerEtat(){
         this.getHistoriqueEtats().add(new EtatJeu(this));
-        System.out.println("enregistr\u00e9s: " + this.getHistoriqueEtats().size());
     }
 
     public void revenirEtatPrecedent(){
@@ -128,6 +129,8 @@ public class Jeu{
      * et passe au joueur suivant
      */
     public void mettreAJour(Position position){
+
+        this.getInterfaceGraphique().getCanvas().repaint();
 
         if(!this.getEtatPartie()){
             return;
