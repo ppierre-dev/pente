@@ -88,6 +88,8 @@ public class Canvas extends JPanel implements MouseListener{
             }
 
         //}
+        g2d.setColor(Color.RED);
+        g2d.fillRect(0, 0, 10 * BoucleDessin.COMPTEUR, 10);
     }
 
     @Override
@@ -116,8 +118,18 @@ public class Canvas extends JPanel implements MouseListener{
             this.getJeu().afficherInformations();
         }
 
-        this.repaint();
+        this.tryRepaint();
 
+    }
+
+    public void tryRepaint(){
+        Canvas that = this;
+        Thread thread = new Thread() {
+            public void run() {
+                that.repaint();
+            }
+        };
+        thread.start();
     }
 
     @Override

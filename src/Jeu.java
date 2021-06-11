@@ -1,6 +1,9 @@
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+
+import javax.swing.SwingUtilities;
 
 /**
  * Classe Jeu
@@ -13,6 +16,7 @@ public class Jeu{
     private InterfaceGraphique interfaceGraphique;
     private Plateau plateau;
     private Couleur tourJoueur;
+    private BoucleDessin boucleDessin;
     private HashMap<Couleur, Joueur> joueurs;
     private ArrayList<EtatJeu> historiqueEtats;
     private boolean etatPartie;
@@ -27,6 +31,7 @@ public class Jeu{
 
 
 
+
     public Jeu(){
 
         this.plateau = new Plateau(this);
@@ -36,11 +41,11 @@ public class Jeu{
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Saissisez le nom du joueur 1 (Blanc) : ");
-        joueurs.put(Couleur.BLANC, new IABloque(Couleur.BLANC, this));
+        joueurs.put(Couleur.BLANC, new Joueur(Couleur.BLANC, this));
         joueurs.get(Couleur.BLANC).setNom(scanner.nextLine());
         
         System.out.println("Saissisez le nom du joueur 2 (Noir) : ");
-        joueurs.put(Couleur.NOIR, new IABloque(Couleur.NOIR, this));
+        joueurs.put(Couleur.NOIR, new Joueur(Couleur.NOIR, this));
         joueurs.get(Couleur.NOIR).setNom(scanner.nextLine());
 
         double random = Math.random();
@@ -53,6 +58,8 @@ public class Jeu{
 
         this.setInterfaceGraphique(new InterfaceGraphique(this));
         this.getInterfaceGraphique().setVisible(true);
+
+        this.setBoucleDessin(new BoucleDessin(this.getInterfaceGraphique().getCanvas()));
 
         this.afficherInformations();
 
@@ -69,6 +76,9 @@ public class Jeu{
      * Gère les affichages textuels du jeu
      */
     public void afficherInformations(){
+
+        this.getBoucleDessin().run();
+
         this.interfaceGraphique.getCadreInformationBlanc().setNom(this.joueurs.get(Couleur.BLANC).getNom());
         this.interfaceGraphique.getCadreInformationNoir().setNom(this.joueurs.get(Couleur.NOIR).getNom());
 
@@ -89,8 +99,6 @@ public class Jeu{
     
         this.interfaceGraphique.getCadreInformationBlanc().setPrises(String.valueOf(this.joueurs.get(Couleur.BLANC).getPairesPrises()));
         this.interfaceGraphique.getCadreInformationNoir().setPrises(String.valueOf(this.joueurs.get(Couleur.NOIR).getPairesPrises()));
-    
-        this.getInterfaceGraphique().getCanvas().repaint();
     }
 
 
@@ -112,8 +120,21 @@ public class Jeu{
             System.out.println("Coup annul\u00e9: " + this.getHistoriqueEtats().size());
 
             if(this.getJoueur(this.getTourJoueur()) instanceof IA){
-                IA ia = (IA) this.getJoueur(this.getTourJoueur());
-                ia.poserPion(ia.calculerCoup());
+                Jeu that = this;
+                Thread threadIA = new Thread(){
+                    @Override
+                    public void run(){
+
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        IA ia = (IA) that.getJoueur(that.getTourJoueur());
+                        ia.poserPion(ia.calculerCoup());
+                    }
+                };
+                threadIA.start();
             }
         }
         else{
@@ -129,8 +150,6 @@ public class Jeu{
      * et passe au joueur suivant
      */
     public void mettreAJour(Position position){
-
-        this.getInterfaceGraphique().getCanvas().repaint();
 
         if(!this.getEtatPartie()){
             return;
@@ -194,8 +213,22 @@ public class Jeu{
         this.afficherInformations();
 
         if(this.getJoueur(this.getTourJoueur()) instanceof IA){
-            IA ia = (IA) this.getJoueur(this.getTourJoueur());
-            ia.poserPion(ia.calculerCoup());
+
+            Jeu that = this;
+            Thread threadIA = new Thread(){
+                @Override
+                public void run(){
+
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    IA ia = (IA) that.getJoueur(that.getTourJoueur());
+                    ia.poserPion(ia.calculerCoup());
+                }
+            };
+            threadIA.start();
         }
     }
 
@@ -248,7 +281,6 @@ public class Jeu{
     public void terminerPartie(Couleur couleur){
         System.out.println("Partie termin\u00e9e");
         this.setEtatPartie(false);
-        System.out.println(couleur);
         if(couleur.equals(Couleur.NOIR)){
             getInterfaceGraphique().getCadreInformationBlanc().getLabelNomJoueur().setVisible(false);
             getInterfaceGraphique().getCadreInformationBlanc().getLabelJouerJoueur().setVisible(false);
@@ -365,4 +397,13 @@ public class Jeu{
     public static Jeu getInstancePrincipale(){
         return Jeu.instancePrincipale;
     }
+
+    public BoucleDessin getBoucleDessin() {
+        return boucleDessin;
+    }
+
+    public void setBoucleDessin(BoucleDessin boucleDessin) {
+        this.boucleDessin = boucleDessin;
+    }
+
 }
