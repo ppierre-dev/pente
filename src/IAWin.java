@@ -3,6 +3,7 @@ public class IAWin extends IABloque{
     public IAWin(Couleur couleur, Jeu jeu){
         super(couleur, jeu);
     }
+    //Regarde si elle a 4 pion aligner et jouer pour gagner si c'est le cas
     @Override
     public Position calculerCoup(){
         Position position;

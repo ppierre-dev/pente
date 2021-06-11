@@ -3,6 +3,7 @@ public class IABloque extends IAAntiPrise{
     public IABloque(Couleur couleur, Jeu jeu){
         super(couleur, jeu);
     }
+    //Regarde si l'adversaire a 3 pion aligner et bloque
     @Override
     public Position calculerCoup(){
         Position position;
@@ -49,8 +50,25 @@ public class IABloque extends IAAntiPrise{
                                 position.getX() + dirX,
                                 position.getY() + dirY
                             );
-                            if(this.getJeu().getPlateau().estLibre(position) == true){
-                                IABloque.fini = true;
+                            if(this.getJeu().getPlateau().estLibre(position) == false && this.getJeu().getPlateau().getIntersection(position) != this.getCouleur() && this.getJeu().getPlateau().getIntersection(position) != null){
+                                if(position.getX() > 0 && position.getX() < Plateau.DIMENSION && position.getY() > 0 && position.getY() < Plateau.DIMENSION){
+                                    position = new Position(
+                                        position.getX() + dirX,
+                                        position.getY() + dirY
+                                    );
+                                    if(this.getJeu().getPlateau().estLibre(position) == true){
+                                        IABloque.fini = true;
+                                    }
+                                    else{
+                                        position = new Position(
+                                            positioninit.getX() + (3*dirX),
+                                            positioninit.getY() + (3*dirY)
+                                        );
+                                        if(this.getJeu().getPlateau().estLibre(position) == true){
+                                            IABloque.fini = true;
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
