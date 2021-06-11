@@ -44,15 +44,23 @@ public class Jeu{
         joueurs.put(Couleur.BLANC, new Joueur(Couleur.BLANC, this));
         joueurs.get(Couleur.BLANC).setNom(scanner.nextLine());
 
-        System.out.println("Voulez-vous jouer contre un joueur ? (oui = Joueur, non = IA)");
-        String reponse = scanner.nextLine();
-        if (reponse.equals("oui")) {
-            System.out.println("Saissisez le nom du joueur 2 (Noir) : ");
-            joueurs.put(Couleur.NOIR, new Joueur(Couleur.NOIR, this));
-            joueurs.get(Couleur.NOIR).setNom(scanner.nextLine());
-        } else if (reponse.equals("non")) {
-            joueurs.put(Couleur.NOIR, new IABloque(Couleur.NOIR, this));
-            joueurs.get(Couleur.NOIR).setNom("IA");
+        Boolean continuer = false;
+
+        while(!continuer) {
+            System.out.println("Voulez-vous jouer contre un joueur ? (oui = Joueur, non = IA)");
+            String reponse = scanner.nextLine();
+            if (reponse.equals("oui")) {
+                System.out.println("Saissisez le nom du joueur 2 (Noir) : ");
+                joueurs.put(Couleur.NOIR, new Joueur(Couleur.NOIR, this));
+                joueurs.get(Couleur.NOIR).setNom(scanner.nextLine());
+                continuer = true;
+            } else if (reponse.equals("non")) {
+                joueurs.put(Couleur.NOIR, new IABloque(Couleur.NOIR, this));
+                joueurs.get(Couleur.NOIR).setNom("IA");
+                continuer = true;
+            } else {
+                System.out.println("Erreur");
+            }
         }
 
         double random = Math.random();
