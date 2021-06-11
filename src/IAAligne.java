@@ -3,6 +3,7 @@ public class IAAligne extends IA{
     public IAAligne(Couleur couleur, Jeu jeu){
         super(couleur, jeu);
     }
+
     @Override
     public Position calculerCoup(){
         Position position;

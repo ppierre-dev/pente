@@ -7,6 +7,13 @@ public class IA extends Joueur{
         super(couleur, jeu);
     }
 
+    public IA clone(){
+        IA ia = new IA(this.getCouleur(), this.getJeu());
+        ia.setNom(this.getNom());
+        ia.setPairesPrises(this.getPairesPrises());
+        return ia;
+    }
+
     //Methode crée par Peepoodoo et Tchoupi (Valentin et Etienne)
     public Position calculerCoup(){
         boolean libre;
