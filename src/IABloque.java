@@ -17,7 +17,11 @@ public class IABloque extends IAAntiPrise{
                 if(this.getJeu().getPlateau().estLibre(positioninit) == false && this.getJeu().getPlateau().getIntersection(positioninit) != this.getCouleur() && this.getJeu().getPlateau().getIntersection(positioninit) != null){
                     for (int a=-1; a<=1;a++){
                         for (int b=-1; b<=1;b++){
-                            position = TestBloque(positioninit, a , b);
+                            position = TestBloque4(positioninit, a , b);
+                            if(IABloque.fini == true){
+                                break forBreak;
+                            }
+                            position = TestBloque3(positioninit, a , b);
                             if(IABloque.fini == true){
                                 break forBreak;
                             }
@@ -31,7 +35,7 @@ public class IABloque extends IAAntiPrise{
         }
         return position;
     }
-    public Position TestBloque(Position positioninit, Integer dirX, Integer dirY){
+    public Position TestBloque3(Position positioninit, Integer dirX, Integer dirY){
         Position position = new Position(0, 0);
         if(positioninit.getX() > 0 && positioninit.getX() < Plateau.DIMENSION && positioninit.getY() > 0 && positioninit.getY() < Plateau.DIMENSION){
             position = new Position(
@@ -59,15 +63,6 @@ public class IABloque extends IAAntiPrise{
                                     if(this.getJeu().getPlateau().estLibre(position) == true){
                                         IABloque.fini = true;
                                     }
-                                    else{
-                                        position = new Position(
-                                            positioninit.getX() + (3*dirX),
-                                            positioninit.getY() + (3*dirY)
-                                        );
-                                        if(this.getJeu().getPlateau().estLibre(position) == true){
-                                            IABloque.fini = true;
-                                        }
-                                    }
                                 }
                             }
                         }
@@ -77,5 +72,33 @@ public class IABloque extends IAAntiPrise{
         }
         return position;
     }
-    
+    public Position TestBloque4(Position positioninit, Integer dirX, Integer dirY){
+        Position position = new Position(0, 0);
+        if(positioninit.getX() > 0 && positioninit.getX() < Plateau.DIMENSION && positioninit.getY() > 0 && positioninit.getY() < Plateau.DIMENSION){
+            position = new Position(
+                positioninit.getX() + dirX,
+                positioninit.getY() + dirY
+            );
+            if(this.getJeu().getPlateau().estLibre(position) == false && this.getJeu().getPlateau().getIntersection(position) != this.getCouleur() && this.getJeu().getPlateau().getIntersection(position) != null){
+                if(position.getX() > 0 && position.getX() < Plateau.DIMENSION && position.getY() > 0 && position.getY() < Plateau.DIMENSION){
+                    position = new Position(
+                        position.getX() + dirX,
+                        position.getY() + dirY
+                    );
+                    if(this.getJeu().getPlateau().estLibre(position) == false && this.getJeu().getPlateau().getIntersection(position) != this.getCouleur() && this.getJeu().getPlateau().getIntersection(position) != null){
+                        if(position.getX() > 0 && position.getX() < Plateau.DIMENSION && position.getY() > 0 && position.getY() < Plateau.DIMENSION){
+                            position = new Position(
+                                position.getX() + dirX,
+                                position.getY() + dirY
+                            );
+                            if(this.getJeu().getPlateau().estLibre(position) == true){
+                                IABloque.fini = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return position;
+    }
 }
