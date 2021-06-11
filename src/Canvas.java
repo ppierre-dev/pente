@@ -87,9 +87,6 @@ public class Canvas extends JPanel implements MouseListener{
                 }
             }
 
-        //}
-        g2d.setColor(Color.RED);
-        g2d.fillRect(0, 0, 10 * BoucleDessin.COMPTEUR, 10);
     }
 
     @Override

@@ -1,7 +1,5 @@
 public class BoucleDessin implements Runnable {
 
-    public static int COMPTEUR = 0;
-
     private Canvas canvas;
     public BoucleDessin(Canvas canvas){
         this.setCanvas(canvas);
@@ -10,7 +8,6 @@ public class BoucleDessin implements Runnable {
     @Override
     public void run() {
         this.getCanvas().repaint();
-        BoucleDessin.COMPTEUR++;
     }
     
     public Canvas getCanvas() {

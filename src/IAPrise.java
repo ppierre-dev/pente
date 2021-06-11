@@ -43,7 +43,6 @@ public class IAPrise extends IAGagne{
                         position.getX() + dirX,
                         position.getY() + dirY
                     );
-                    System.out.println(IAPrise.fini);
                     if(this.getJeu().getPlateau().estLibre(position) == true){
                         IAPrise.fini = true;
                     }
