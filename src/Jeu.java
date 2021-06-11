@@ -72,11 +72,35 @@ public class Jeu{
                 joueurs.put(Couleur.BLANC, new Joueur(Couleur.BLANC, this));
                 joueurs.get(Couleur.BLANC).setNom(scanner.nextLine());
 
-                joueurs.put(Couleur.NOIR, new IAWin(Couleur.NOIR, this));
-                joueurs.get(Couleur.NOIR).setNom("IA");
-                continuer = true;
+                Joueur niveauIA = null;
+                Boolean choixFait = false;
+                while (!choixFait) {
+                    System.out.println("Tapez :");
+                    System.out.println("1 --> IA niveau Facile");
+                    System.out.println("2 --> IA niveau Intermediaire");
+                    System.out.println("3 --> IA niveau Difficile");
+                    String niveau = scanner.nextLine();
+                    if (niveau.equals("1")) {
+                        niveauIA = new IABloque(Couleur.NOIR, this);
+                        choixFait = true;
+                    } else if (niveau.equals("2")) {
+                        niveauIA = new IAPrise(Couleur.NOIR, this);
+                        choixFait = true;
+                    } else if (niveau.equals("3")) {
+                        niveauIA = new IAWin(Couleur.NOIR, this);
+                        choixFait = true;
+                    } else {
+                        System.out.println("Erreur de saisie, veuillez recommencer");
+                    }
+                }
+                
+                if (niveauIA != null) {
+                    joueurs.put(Couleur.NOIR, niveauIA);
+                    joueurs.get(Couleur.NOIR).setNom("IA");
+                    continuer = true;
+                }
             } else {
-                System.out.println("Mauvaise saisie, veuillez recommencer");
+                System.out.println("Erreur de saisie, veuillez recommencer");
             }
         }
 
