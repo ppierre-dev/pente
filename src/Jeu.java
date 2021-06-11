@@ -38,6 +38,11 @@ public class Jeu{
         this.joueurs = new HashMap<Couleur, Joueur>();
         this.setHistoriqueEtats(new ArrayList<EtatJeu>());
         this.etatPartie = true;
+        
+        /**
+         * Choix du mode de jeu
+         * Choix du niveau de l'ia si joueur vs ia
+         */
 
         Scanner scanner = new Scanner(System.in);
         Boolean continuer = false;
@@ -78,10 +83,10 @@ public class Jeu{
                     System.out.println("3 --> IA niveau Difficile");
                     String niveau = scanner.nextLine();
                     if (niveau.equals("1")) {
-                        niveauIA = new IABloque(Couleur.NOIR, this);
+                        niveauIA = new IAAntiPrise(Couleur.NOIR, this);
                         choixFait = true;
                     } else if (niveau.equals("2")) {
-                        niveauIA = new IAPrise(Couleur.NOIR, this);
+                        niveauIA = new IABloque(Couleur.NOIR, this);
                         choixFait = true;
                     } else if (niveau.equals("3")) {
                         niveauIA = new IAWin(Couleur.NOIR, this);
