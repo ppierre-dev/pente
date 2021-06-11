@@ -40,9 +40,7 @@ public class Jeu{
         this.etatPartie = true;
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Saissisez le nom du joueur 1 (Blanc) : ");
-        joueurs.put(Couleur.BLANC, new Joueur(Couleur.BLANC, this));
-        joueurs.get(Couleur.BLANC).setNom(scanner.nextLine());
+        
 
         System.out.println("Voulez-vous jouer contre un joueur ? (oui = Joueur, non = IA)");
         String reponse = scanner.nextLine();
