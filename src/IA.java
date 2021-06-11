@@ -8,6 +8,7 @@ public class IA extends Joueur{
     }
 
     //Methode crée par Peepoodoo et Tchoupi (Valentin et Etienne)
+    //Cet classe va prend des coordonnées aleatoire et regarde si la case et libre pour savoir si elle peut jouer cet intersection
     public Position calculerCoup(){
         boolean libre;
         Position position;
