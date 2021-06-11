@@ -4,7 +4,6 @@ public class IAAligne extends IA{
         super(couleur, jeu);
     }
 
-    //Cet classe va regarde si l'I.A. a 3 pion aligne et jouer pour en aligner 4 
     @Override
     public Position calculerCoup(){
         Position position;

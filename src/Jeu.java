@@ -20,6 +20,7 @@ public class Jeu{
     private HashMap<Couleur, Joueur> joueurs;
     private ArrayList<EtatJeu> historiqueEtats;
     private boolean etatPartie;
+
     public static void main(String[] args){
 
         GestionnaireImages.setImage("PionBlanc", "../images/PionBlanc.png");
@@ -45,6 +46,8 @@ public class Jeu{
          */
 
         Scanner scanner = new Scanner(System.in);
+        
+
         Boolean continuer = false;
         while(!continuer) {
             System.out.println("Tapez :");
@@ -166,7 +169,7 @@ public class Jeu{
     }
 
     public void revenirEtatPrecedent(){
-        if(this.getHistoriqueEtats().size() > 0 && this.getEtatPartie()){
+        if(this.getHistoriqueEtats().size() > 1 && this.getEtatPartie()){
             EtatJeu etatJeu = this.getHistoriqueEtats().get(this.getHistoriqueEtats().size() - 1);
 
             this.getPlateau().setIntersections(etatJeu.getPlateau().getIntersections());;
@@ -309,15 +312,37 @@ public class Jeu{
     public void testerAlignement(Position positionInitiale, Couleur couleur,  int dirX, int dirY){
 
         int pierres = 0;
-        for(int k=1; k<=4; k++){
+        int k = 1;
+        while(k <= 4){
             Position pos = new Position(
                 positionInitiale.getX() + (k * dirX),
                 positionInitiale.getY() + (k * dirY)
             );
             if(!plateau.estLibre(pos) && plateau.getIntersection(pos) != null && plateau.getIntersection(pos).equals(couleur)){
                 pierres++;
+                k++;
+            }
+            else{
+                break;
             }
         }
+
+        k = 1;
+        while(k <= 4){
+            Position pos = new Position(
+                positionInitiale.getX() - (k * dirX),
+                positionInitiale.getY() - (k * dirY)
+            );
+            if(!plateau.estLibre(pos) && plateau.getIntersection(pos) != null && plateau.getIntersection(pos).equals(couleur)){
+                pierres++;
+                k++;
+            }
+            else{
+                break;
+            }
+        }
+
+
         if(pierres >= 4){
             this.terminerPartie(couleur);
         }
