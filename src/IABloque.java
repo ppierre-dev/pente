@@ -1,4 +1,4 @@
-public class IABloque extends IAPrise{
+public class IABloque extends IAAntiPrise{
     private static boolean fini = false;
     public IABloque(Couleur couleur, Jeu jeu){
         super(couleur, jeu);

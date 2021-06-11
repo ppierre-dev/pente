@@ -1,4 +1,4 @@
-public class IAPrise extends IAAntiPrise{
+public class IAPrise extends IAAligne{
     private static boolean fini;
     public IAPrise(Couleur couleur, Jeu jeu){
         super(couleur, jeu);
