@@ -40,26 +40,40 @@ public class Jeu{
         this.etatPartie = true;
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Saissisez le nom du joueur 1 (Blanc) : ");
-        joueurs.put(Couleur.BLANC, new Joueur(Couleur.BLANC, this));
-        joueurs.get(Couleur.BLANC).setNom(scanner.nextLine());
-
         Boolean continuer = false;
-
         while(!continuer) {
-            System.out.println("Voulez-vous jouer contre un joueur ? (oui = Joueur, non = IA)");
+            System.out.println("Tapez :");
+            System.out.println("1 --> IA VS IA");
+            System.out.println("2 --> Joueur VS Joueur");
+            System.out.println("3 --> Joueur VS IA");
             String reponse = scanner.nextLine();
-            if (reponse.equals("oui")) {
+            if (reponse.equals("1")) {
+                joueurs.put(Couleur.NOIR, new IAWin(Couleur.NOIR, this));
+                joueurs.get(Couleur.NOIR).setNom("IA 2");
+
+                joueurs.put(Couleur.BLANC, new IAWin(Couleur.BLANC, this));
+                joueurs.get(Couleur.BLANC).setNom("IA 1");
+                continuer = true;
+            } else if (reponse.equals("2")) {
+                System.out.println("Saissisez le nom du joueur 1 (Blanc) : ");
+                joueurs.put(Couleur.BLANC, new Joueur(Couleur.BLANC, this));
+                joueurs.get(Couleur.BLANC).setNom(scanner.nextLine());
+
                 System.out.println("Saissisez le nom du joueur 2 (Noir) : ");
                 joueurs.put(Couleur.NOIR, new Joueur(Couleur.NOIR, this));
                 joueurs.get(Couleur.NOIR).setNom(scanner.nextLine());
+
                 continuer = true;
-            } else if (reponse.equals("non")) {
-                joueurs.put(Couleur.NOIR, new IABloque(Couleur.NOIR, this));
+            } else if (reponse.equals("3")) {
+                System.out.println("Saissisez le nom du joueur 1 (Blanc) : ");
+                joueurs.put(Couleur.BLANC, new Joueur(Couleur.BLANC, this));
+                joueurs.get(Couleur.BLANC).setNom(scanner.nextLine());
+
+                joueurs.put(Couleur.NOIR, new IAWin(Couleur.NOIR, this));
                 joueurs.get(Couleur.NOIR).setNom("IA");
                 continuer = true;
             } else {
-                System.out.println("Erreur");
+                System.out.println("Mauvaise saisie, veuillez recommencer");
             }
         }
 
