@@ -17,7 +17,7 @@ public class EtatJeu {
 
         HashMap<Couleur, Joueur> joueurs = new HashMap<Couleur, Joueur>();
         jeu.getJoueurs().forEach((couleur, joueur) -> {
-            joueurs.put(couleur, joueur);
+            joueurs.put(couleur, joueur.clone());
         });
         this.joueurs = joueurs;
         this.etatPartie = jeu.getEtatPartie();

@@ -20,6 +20,7 @@ public class Jeu{
     private HashMap<Couleur, Joueur> joueurs;
     private ArrayList<EtatJeu> historiqueEtats;
     private boolean etatPartie;
+    
     public static void main(String[] args){
 
         GestionnaireImages.setImage("PionBlanc", "../images/PionBlanc.png");
@@ -121,7 +122,7 @@ public class Jeu{
     }
 
     public void revenirEtatPrecedent(){
-        if(this.getHistoriqueEtats().size() > 0 && this.getEtatPartie()){
+        if(this.getHistoriqueEtats().size() > 1 && this.getEtatPartie()){
             EtatJeu etatJeu = this.getHistoriqueEtats().get(this.getHistoriqueEtats().size() - 1);
 
             this.getPlateau().setIntersections(etatJeu.getPlateau().getIntersections());;
