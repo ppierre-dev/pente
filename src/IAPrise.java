@@ -3,6 +3,7 @@ public class IAPrise extends IAAligne{
     public IAPrise(Couleur couleur, Jeu jeu){
         super(couleur, jeu);
     }
+    //Regarde si elle peut prend 2 pion a l adversaire
     @Override
     public Position calculerCoup(){
         Position position;

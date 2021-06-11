@@ -20,6 +20,7 @@ public class Jeu{
     private HashMap<Couleur, Joueur> joueurs;
     private ArrayList<EtatJeu> historiqueEtats;
     private boolean etatPartie;
+
     public static void main(String[] args){
 
         GestionnaireImages.setImage("PionBlanc", "../images/PionBlanc.png");
@@ -40,6 +41,8 @@ public class Jeu{
         this.etatPartie = true;
 
         Scanner scanner = new Scanner(System.in);
+        
+
         Boolean continuer = false;
         while(!continuer) {
             System.out.println("Tapez :");
@@ -69,11 +72,35 @@ public class Jeu{
                 joueurs.put(Couleur.BLANC, new Joueur(Couleur.BLANC, this));
                 joueurs.get(Couleur.BLANC).setNom(scanner.nextLine());
 
-                joueurs.put(Couleur.NOIR, new IAWin(Couleur.NOIR, this));
-                joueurs.get(Couleur.NOIR).setNom("IA");
-                continuer = true;
+                Joueur niveauIA = null;
+                Boolean choixFait = false;
+                while (!choixFait) {
+                    System.out.println("Tapez :");
+                    System.out.println("1 --> IA niveau Facile");
+                    System.out.println("2 --> IA niveau Intermediaire");
+                    System.out.println("3 --> IA niveau Difficile");
+                    String niveau = scanner.nextLine();
+                    if (niveau.equals("1")) {
+                        niveauIA = new IABloque(Couleur.NOIR, this);
+                        choixFait = true;
+                    } else if (niveau.equals("2")) {
+                        niveauIA = new IAPrise(Couleur.NOIR, this);
+                        choixFait = true;
+                    } else if (niveau.equals("3")) {
+                        niveauIA = new IAWin(Couleur.NOIR, this);
+                        choixFait = true;
+                    } else {
+                        System.out.println("Erreur de saisie, veuillez recommencer");
+                    }
+                }
+                
+                if (niveauIA != null) {
+                    joueurs.put(Couleur.NOIR, niveauIA);
+                    joueurs.get(Couleur.NOIR).setNom("IA");
+                    continuer = true;
+                }
             } else {
-                System.out.println("Mauvaise saisie, veuillez recommencer");
+                System.out.println("Erreur de saisie, veuillez recommencer");
             }
         }
 
@@ -137,7 +164,7 @@ public class Jeu{
     }
 
     public void revenirEtatPrecedent(){
-        if(this.getHistoriqueEtats().size() > 0 && this.getEtatPartie()){
+        if(this.getHistoriqueEtats().size() > 1 && this.getEtatPartie()){
             EtatJeu etatJeu = this.getHistoriqueEtats().get(this.getHistoriqueEtats().size() - 1);
 
             this.getPlateau().setIntersections(etatJeu.getPlateau().getIntersections());;
@@ -280,15 +307,37 @@ public class Jeu{
     public void testerAlignement(Position positionInitiale, Couleur couleur,  int dirX, int dirY){
 
         int pierres = 0;
-        for(int k=1; k<=4; k++){
+        int k = 1;
+        while(k <= 4){
             Position pos = new Position(
                 positionInitiale.getX() + (k * dirX),
                 positionInitiale.getY() + (k * dirY)
             );
             if(!plateau.estLibre(pos) && plateau.getIntersection(pos) != null && plateau.getIntersection(pos).equals(couleur)){
                 pierres++;
+                k++;
+            }
+            else{
+                break;
             }
         }
+
+        k = 1;
+        while(k <= 4){
+            Position pos = new Position(
+                positionInitiale.getX() - (k * dirX),
+                positionInitiale.getY() - (k * dirY)
+            );
+            if(!plateau.estLibre(pos) && plateau.getIntersection(pos) != null && plateau.getIntersection(pos).equals(couleur)){
+                pierres++;
+                k++;
+            }
+            else{
+                break;
+            }
+        }
+
+
         if(pierres >= 4){
             this.terminerPartie(couleur);
         }

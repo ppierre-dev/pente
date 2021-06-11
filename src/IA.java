@@ -7,7 +7,15 @@ public class IA extends Joueur{
         super(couleur, jeu);
     }
 
+    public IA clone(){
+        IA ia = new IA(this.getCouleur(), this.getJeu());
+        ia.setNom(this.getNom());
+        ia.setPairesPrises(this.getPairesPrises());
+        return ia;
+    }
+
     //Methode crée par Peepoodoo et Tchoupi (Valentin et Etienne)
+    //Cet classe va prend des coordonnées aleatoire et regarde si la case et libre pour savoir si elle peut jouer cet intersection
     public Position calculerCoup(){
         boolean libre;
         Position position;

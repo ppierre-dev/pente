@@ -33,7 +33,16 @@ public class Joueur{
         this.pairesPrises++;
     }
 
+    public void setPairesPrises(int prises){
+        this.pairesPrises = prises;
+    }
 
+    public Joueur clone(){
+        Joueur joueur = new Joueur(this.getCouleur(), this.getJeu());
+        joueur.setNom(this.getNom());
+        joueur.setPairesPrises(this.getPairesPrises());
+        return joueur;
+    }
 
     /**
      * Obtenir le nombre de pions du joueur
