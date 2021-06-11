@@ -41,12 +41,19 @@ public class Jeu{
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Saissisez le nom du joueur 1 (Blanc) : ");
-        joueurs.put(Couleur.BLANC, new IAWin(Couleur.BLANC, this));
+        joueurs.put(Couleur.BLANC, new Joueur(Couleur.BLANC, this));
         joueurs.get(Couleur.BLANC).setNom(scanner.nextLine());
-        
-        System.out.println("Saissisez le nom du joueur 2 (Noir) : ");
-        joueurs.put(Couleur.NOIR, new Joueur(Couleur.NOIR, this));
-        joueurs.get(Couleur.NOIR).setNom(scanner.nextLine());
+
+        System.out.println("Voulez-vous jouer contre un joueur ? (oui = Joueur, non = IA)");
+        String reponse = scanner.nextLine();
+        if (reponse.equals("oui")) {
+            System.out.println("Saissisez le nom du joueur 2 (Noir) : ");
+            joueurs.put(Couleur.NOIR, new Joueur(Couleur.NOIR, this));
+            joueurs.get(Couleur.NOIR).setNom(scanner.nextLine());
+        } else if (reponse.equals("non")) {
+            joueurs.put(Couleur.NOIR, new IABloque(Couleur.NOIR, this));
+            joueurs.get(Couleur.NOIR).setNom("IA");
+        }
 
         double random = Math.random();
         if(random < 0.5){
