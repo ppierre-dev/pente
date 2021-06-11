@@ -43,6 +43,7 @@ public class Jeu{
         System.out.println("Saissisez le nom du joueur 1 (Blanc) : ");
         joueurs.put(Couleur.BLANC, new Joueur(Couleur.BLANC, this));
         joueurs.get(Couleur.BLANC).setNom(scanner.nextLine());
+<<<<<<< HEAD
 
         System.out.println("Voulez-vous jouer contre un joueur ? (oui = Joueur, non = IA)");
         String reponse = scanner.nextLine();
@@ -54,6 +55,12 @@ public class Jeu{
             joueurs.put(Couleur.NOIR, new IABloque(Couleur.NOIR, this));
             joueurs.get(Couleur.NOIR).setNom("IA");
         }
+=======
+        
+        System.out.println("Saissisez le nom du joueur 2 (Noir) : ");
+        joueurs.put(Couleur.NOIR, new IAWin(Couleur.NOIR, this));
+        joueurs.get(Couleur.NOIR).setNom(scanner.nextLine());
+>>>>>>> b5755b7fbae7b96bfa71d3f8862cfcba9f662ab7
 
         double random = Math.random();
         if(random < 0.5){
@@ -115,7 +122,7 @@ public class Jeu{
     }
 
     public void revenirEtatPrecedent(){
-        if(this.getHistoriqueEtats().size() > 0){
+        if(this.getHistoriqueEtats().size() > 0 && this.getEtatPartie()){
             EtatJeu etatJeu = this.getHistoriqueEtats().get(this.getHistoriqueEtats().size() - 1);
 
             this.getPlateau().setIntersections(etatJeu.getPlateau().getIntersections());;
@@ -215,6 +222,21 @@ public class Jeu{
         }
         else{
             this.setTourJoueur(Couleur.BLANC);
+        }
+
+        if(this.getJoueur(this.getTourJoueur()).getNombrePions() >= 60){
+            if(this.getEtatPartie() == true){
+                /*
+                    Dans le cas où le joueur devant jouer
+                    n'a plus de pions, il perd
+                */
+                if(this.getTourJoueur().equals(Couleur.BLANC)){
+                    this.terminerPartie(Couleur.NOIR);
+                }
+                else{
+                    this.terminerPartie(Couleur.BLANC);
+                }
+            }
         }
 
         this.afficherInformations();
