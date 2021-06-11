@@ -1,13 +1,13 @@
-public class IAGagne extends IA{
+public class IAAligne extends IA{
     private static boolean fini;
-    public IAGagne(Couleur couleur, Jeu jeu){
+    public IAAligne(Couleur couleur, Jeu jeu){
         super(couleur, jeu);
     }
     @Override
     public Position calculerCoup(){
         Position position;
         Position positioninit;
-        IAGagne.fini = false;
+        IAAligne.fini = false;
         position = new Position(0,0);
         forBreak:
         for (int x=0; x<19;x++){
@@ -17,7 +17,7 @@ public class IAGagne extends IA{
                     for (int a=-1; a<=1; a++){
                         for (int b=-1; b<=1; b++){
                             position = TestGagne(positioninit, a , b);
-                            if(IAGagne.fini == true){
+                            if(IAAligne.fini == true){
                                 break forBreak;
                             }
                         }
@@ -25,7 +25,7 @@ public class IAGagne extends IA{
                 }
             }   
         }
-        if(IAGagne.fini == false){
+        if(IAAligne.fini == false){
             position = super.calculerCoup();
         }
         return position;
@@ -43,9 +43,8 @@ public class IAGagne extends IA{
                         position.getX() + dirX,
                         position.getY() + dirY
                     );
-                    System.out.println(IAGagne.fini);
                     if(this.getJeu().getPlateau().estLibre(position) == true){
-                        IAGagne.fini = true;
+                        IAAligne.fini = true;
                     }
                 }
             }

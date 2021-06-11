@@ -9,7 +9,6 @@ public class IA extends Joueur{
 
     //Methode crée par Peepoodoo et Tchoupi (Valentin et Etienne)
     public Position calculerCoup(){
-
         boolean libre;
         Position position;
         libre = false;
@@ -30,14 +29,13 @@ public class IA extends Joueur{
     @Override
     public void poserPion(Position position){
         if(position == null){
-            Position pos = this.calculerCoup();
-            if(this.getJeu().getPlateau().poserPion(this.getCouleur(), pos)){
-                this.getJeu().mettreAJour(pos);
+            if(this.getJeu().getPlateau().poserPion(this.getCouleur(), this.calculerCoup())){
+                this.getJeu().mettreAJour(position); 
             }
         }
         else{
             if(this.getJeu().getPlateau().poserPion(this.getCouleur(), position)){
-                this.getJeu().mettreAJour(position);
+                this.getJeu().mettreAJour(position); 
             }
         }
     }
