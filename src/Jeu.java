@@ -7,6 +7,7 @@ import javax.swing.SwingUtilities;
 
 /**
  * Classe Jeu
+ * @author Lucas DOUTRELUIGNE, Jérémy CATEZ, Pierre PREVOST, Alexis PROUST
  * Classe principale de gestion du jeu
  */
 public class Jeu{
@@ -23,8 +24,8 @@ public class Jeu{
 
     public static void main(String[] args){
 
-        GestionnaireImages.setImage("PionBlanc", "../images/PionBlanc.png");
-        GestionnaireImages.setImage("PionNoir", "../images/PionNoir.png");
+        GestionnaireImages.setImage("PionBlanc", "PionBlanc.png");
+        GestionnaireImages.setImage("PionNoir", "PionNoir.png");
 
     }
 

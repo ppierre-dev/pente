@@ -1,6 +1,12 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Classe EtatJeu
+ * @author Lucas DOUTRELUIGNE
+ * Enregistre l'état du jeu à un moment T
+ * Est utilisée pour revenir à un tour précédent
+ */
 public class EtatJeu {
 
     private Plateau plateau;

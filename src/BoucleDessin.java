@@ -1,3 +1,7 @@
+/**
+ * Classe BoucleDessin
+ * @author Lucas DOUTRELUIGNE
+ */
 public class BoucleDessin implements Runnable {
 
     private Canvas canvas;

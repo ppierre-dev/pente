@@ -1,9 +1,26 @@
+/**
+ * Classe IAAligne
+ * @author Étienne OGEZ
+ * Niveau supérieur d'IA
+ * 1) Cherche à prendre des paires de pions
+ * adverses
+ * 2) Cherche à bloquer les alignements de pions
+ * adverses
+ * 3) Cherche à bloquer les attaques prises
+ * adverses (se protège)
+ * 4) Analyse le plateau et cherche des alignements
+ * de pions à réaliser
+ */
 public class IAPrise extends IAAligne{
     private static boolean fini;
     public IAPrise(Couleur couleur, Jeu jeu){
         super(couleur, jeu);
     }
-    //Regarde si elle peut prend 2 pion a l adversaire
+    
+    /**
+     * Nouvelle version de la méthode
+     * Cherche à prendre des paires de pions adverses
+     */
     @Override
     public Position calculerCoup(){
         Position position;
@@ -31,6 +48,10 @@ public class IAPrise extends IAAligne{
         }
         return position;
     }
+
+    /**
+     * Cherche des paires adverses à capturer
+     */
     public Position TestPrise(Position positioninit, Integer dirX , Integer dirY){
         Position position = new Position(0, 0);
         if(positioninit.getX() > 0 && positioninit.getX() < Plateau.DIMENSION && positioninit.getY() > 0 && positioninit.getY() < Plateau.DIMENSION){

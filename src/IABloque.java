@@ -1,9 +1,25 @@
+/**
+ * Classe IAAligne
+ * @author Étienne OGEZ
+ * Niveau supérieur d'IA
+ * 1) Cherche à bloquer les alignements de pions
+ * adverses
+ * 2) Cherche à bloquer les attaques prises
+ * adverses (se protège)
+ * 3) Analyse le plateau et cherche des alignements
+ * de pions à réaliser
+ */
 public class IABloque extends IAAntiPrise{
     private static boolean fini = false;
     public IABloque(Couleur couleur, Jeu jeu){
         super(couleur, jeu);
     }
-    //Regarde si l'adversaire a 3 pion aligner et bloque
+    
+    /**
+     * Nouvelle version de la méthode
+     * Cherche à bloquer des alignements à partir
+     * de trois pions adverses alignés
+     */
     @Override
     public Position calculerCoup(){
         Position position;
@@ -35,6 +51,10 @@ public class IABloque extends IAAntiPrise{
         }
         return position;
     }
+
+    /**
+     * Cherche des alignements de trois pions
+     */
     public Position TestBloque3(Position positioninit, Integer dirX, Integer dirY){
         Position position = new Position(0, 0);
         if(positioninit.getX() > 0 && positioninit.getX() < Plateau.DIMENSION && positioninit.getY() > 0 && positioninit.getY() < Plateau.DIMENSION){
@@ -72,6 +92,11 @@ public class IABloque extends IAAntiPrise{
         }
         return position;
     }
+
+
+    /**
+     * Cherche des alignements de quatre pions
+     */
     public Position TestBloque4(Position positioninit, Integer dirX, Integer dirY){
         Position position = new Position(0, 0);
         if(positioninit.getX() > 0 && positioninit.getX() < Plateau.DIMENSION && positioninit.getY() > 0 && positioninit.getY() < Plateau.DIMENSION){

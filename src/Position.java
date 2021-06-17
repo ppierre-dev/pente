@@ -1,5 +1,6 @@
 /**
  * Classe Position
+ * @author Alexis PROUST
  * Représente une position quelconque sur le
  * plateau de jeu
  */

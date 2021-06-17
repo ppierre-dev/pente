@@ -1,7 +1,15 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Classe BordureInterface
+ * @author Lucas DOUTRELUIGNE
+ * Il s'agit uniquement d'un cosmétique d'interface
+ */
 public class BordureInterface extends JPanel{
+    /**
+     * Méthode de rafraîchissement d'affichage
+     */
     @Override
     public void paint(Graphics g){
         g.setColor(Color.black);

@@ -1,6 +1,13 @@
 import java.util.ArrayList;
 import java.util.UUID;
 
+/**
+ * Classe Joueur
+ * @author Lucas DOUTRELUIGNE, Pierre PREVOST
+ * Représente un joueur
+ * La Classe IA étend cette classe
+ * pour des raisons pratiques
+ */
 public class Joueur{
     
     public static int MAX_PIONS = 60;
@@ -44,42 +51,22 @@ public class Joueur{
         return joueur;
     }
 
-    /**
-     * Obtenir le nombre de pions du joueur
-     * @return
-     */
     public final int getNombrePions(){
         return this.getJeu().getPlateau().getNombrePionsCouleur(this.getCouleur());
     }
 
-    /**
-     * Obtenir le nom du joueur
-     * @return Le nom
-     */
     public String getNom() {
         return nom;
     }
 
-    /**
-     * Définir le nom du joueur
-     * @param nom Le nom
-     */
     public void setNom(String nom) {
         this.nom = nom;
     }
 
-    /**
-     * Obtenir la couleur du joueur
-     * @return
-     */
     public Couleur getCouleur(){
         return this.couleur;
     }
 
-    /**
-     * Définir en interne la couleur du joueur
-     * @param couleur Une couleur
-     */
     private void setCouleur(Couleur couleur){
         this.couleur = couleur;
     }

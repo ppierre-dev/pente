@@ -6,6 +6,11 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
+/**
+ * Classe GestionnaireImages
+ * @author Lucas DOUTRELUIGNE
+ * Gère les images nécessaires au bon fonctionnement du jeu
+ */
 public abstract class GestionnaireImages {
     
     private static HashMap<String, BufferedImage> images = new HashMap<String, BufferedImage>();

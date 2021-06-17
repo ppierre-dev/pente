@@ -1,9 +1,28 @@
+/**
+ * Classe IAWin
+ * @author Étienne OGEZ
+ * Niveau supérieur d'IA
+ * 1) Cherche à terminer un alignement de cinq pions
+ * (uniquement si la suite en possède déjà quatre)
+ * 2) Cherche à prendre des paires de pions
+ * adverses
+ * 3) Cherche à bloquer les alignements de pions
+ * adverses
+ * 4) Cherche à bloquer les attaques prises
+ * adverses (se protège)
+ * 5) Analyse le plateau et cherche des alignements
+ * de pions à réaliser
+ */
 public class IAWin extends IABloque{
     private static boolean fini;
     public IAWin(Couleur couleur, Jeu jeu){
         super(couleur, jeu);
     }
-    //Regarde si elle a 4 pion aligner et jouer pour gagner si c'est le cas
+    
+    /**
+     * Cherche à terminer un alignement de cinq pions
+     * uniquement si quatre pions sont déjà alignés
+     */
     @Override
     public Position calculerCoup(){
         Position position;
@@ -31,6 +50,10 @@ public class IAWin extends IABloque{
         }
         return position;
     }
+
+    /**
+     * Méthode de découpage du code
+     */
     public Position TestGagne(Position positioninit, Integer dirX , Integer dirY){
         Position position = new Position(0, 0);
         if(positioninit.getX() > 0 && positioninit.getX() < Plateau.DIMENSION && positioninit.getY() > 0 && positioninit.getY() < Plateau.DIMENSION){

@@ -2,6 +2,7 @@ import java.lang.annotation.Annotation;
 
 /**
  * Classe Plateau
+ * @author Lucas DOUTRELUIGNE, Pierre PREVOST, Alexis PROUST
  * Représente un plateau de jeu
  */
 public final class Plateau{

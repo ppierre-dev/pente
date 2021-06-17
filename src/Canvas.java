@@ -6,6 +6,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 /**
  * Classe Canvas
+ * @author Lucas DOUTRELUIGNE, Jérémy CATEZ
  * Gère le dessin graphique du jeu
  */
 public class Canvas extends JPanel implements MouseListener{

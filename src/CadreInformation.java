@@ -3,6 +3,7 @@ import javax.swing.*;
 
 /**
  * Classe CadreInformation
+ * @author Lucas DOUTRELUIGNE, Jérémy Catez
  * Représente un cadre d'information d'un joueur
  */
 public class CadreInformation extends JPanel{
@@ -91,6 +92,11 @@ public class CadreInformation extends JPanel{
         this.setVisible(true);
     }
 
+    /*
+        Méthodes pour modifier les messages
+        affichés
+    */
+
     public void afficherMessageJouer(){
         this.getLabelJouerJoueur().setForeground(Color.GREEN);
         this.getLabelJouerJoueur().setText("C'est \u00e0 vous de jouer !");
@@ -106,35 +112,34 @@ public class CadreInformation extends JPanel{
         this.getLabelWin().setText("VAINQUEUR");
     }
 
+    public void setPrises(String prises){
+        this.getLabelPrisesJoueur().setText(prises + " prise(s) effectu\u00e9e(s)");
+    }
 
-    /**
-     * Obtenir le label du nom du joueur
-     * @return Une instance de JLabel
-     */
+    public void setCouleur(Couleur couleur){
+        this.getLabelCouleurJoueur().setText("Equipe " + couleur.toString());
+    }
+
+    public void setPions(String pions){
+        this.getLabelPionsJoueur().setText(pions + " pion(s) restant(s)");
+    }
+
+
+    
+
+
     public JLabel getLabelNomJoueur() {
         return this.labelNomJoueur;
     }
 
-    /**
-     * Définir le label du nom du joueur
-     * @param labelNomJoueur Une instance de JLabel
-     */
     public void setLabelNomJoueur(JLabel labelNomJoueur) {
         this.labelNomJoueur = labelNomJoueur;
     }
 
-    /**
-     * Obtenir le label de la couleur du joueur
-     * @return Une instance de JLabel
-     */
     public JLabel getLabelCouleurJoueur() {
         return this.labelCouleurJoueur;
     }
 
-    /**
-     * Définir le label de la couleur du joueur
-     * @param labelCouleurJoueur Une instance de JLabel
-     */
     public void setLabelCouleurJoueur(JLabel labelCouleurJoueur) {
         this.labelCouleurJoueur = labelCouleurJoueur;
     }
@@ -171,28 +176,13 @@ public class CadreInformation extends JPanel{
         this.getLabelNomJoueur().setText(nom);
     }
 
-    public void setCouleur(Couleur couleur){
-        this.getLabelCouleurJoueur().setText("Equipe " + couleur.toString());
-    }
-
-    public void setPions(String pions){
-        this.getLabelPionsJoueur().setText(pions + " pion(s) restant(s)");
-    }
-
     public String getPions(){
         return this.getLabelPionsJoueur().getText();
-    }
-
-    public void setPrises(String prises){
-        this.getLabelPrisesJoueur().setText(prises + " prise(s) effectu\u00e9e(s)");
     }
 
     public String getPrises(){
         return this.getLabelPrisesJoueur().getText();
     }
-
-
-
 
     public void setLabelWin(JLabel win) {
         this.win = win;

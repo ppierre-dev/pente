@@ -4,6 +4,7 @@ import java.awt.event.*;
 
 /**
  * Classe InterfaceGraphique
+ * @author Lucas DOUTRELUIGNE, Jérémy CATEZ
  * Représente l'interface graphique du jeu
  * par laquelle toutes les interactions entre
  * le joueur et le jeu passeront

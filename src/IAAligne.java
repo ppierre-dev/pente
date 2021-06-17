@@ -1,9 +1,19 @@
+/**
+ * Classe IAAligne
+ * @author Étienne OGEZ, Valentin MANTEZ
+ * Niveau supérieur d'IA
+ * 1) Analyse le plateau et cherche des alignements
+ * de pions à réaliser
+ */
 public class IAAligne extends IA{
     private static boolean fini;
     public IAAligne(Couleur couleur, Jeu jeu){
         super(couleur, jeu);
     }
 
+    /**
+     * Nouvelle version de la méthode
+     */
     @Override
     public Position calculerCoup(){
         Position position;
@@ -31,6 +41,11 @@ public class IAAligne extends IA{
         }
         return position;
     }
+
+    /**
+     * Interprète l'état du jeu pour chercher un endroit
+     * où faire un alignement de pions
+     */
     public Position TestGagne(Position positioninit, Integer dirX , Integer dirY){
         Position position = new Position(0, 0);
         if(positioninit.getX() > 0 && positioninit.getX() < Plateau.DIMENSION && positioninit.getY() > 0 && positioninit.getY() < Plateau.DIMENSION){

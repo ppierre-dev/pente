@@ -1,10 +1,21 @@
+/**
+ * Classe IAAligne
+ * @author Étienne OGEZ, Valentin MANTEZ
+ * Niveau supérieur d'IA
+ * Analyse le plateau et cherche des alignements
+ * de pions à réaliser
+ * Cherche à bloquer les attaques prises
+ * adverses (se protège)
+ */
 public class IAAntiPrise extends IAPrise{
     private static boolean fini;
     public IAAntiPrise(Couleur couleur, Jeu jeu){
         super(couleur, jeu);
     }
 
-    //L'I.A. va regarde si elle n'ai pas sur le point de se faire prend 2 pion et bloquer si c le cas
+    /**
+     * Nouvelle version de la méthode
+     */
     @Override
     public Position calculerCoup(){
         Position position;
@@ -32,6 +43,11 @@ public class IAAntiPrise extends IAPrise{
         }
         return position;
     }
+
+    /**
+     * Interprète l'état du jeu pour chercher un endroit
+     * où faire une défense anti-prise de ses pions
+     */
     public Position TestAntiPrise(Position positioninit, Integer dirX , Integer dirY){
         Position position = new Position(0, 0);
         if(positioninit.getX() > 0 && positioninit.getX() < Plateau.DIMENSION && positioninit.getY() > 0 && positioninit.getY() < Plateau.DIMENSION){
