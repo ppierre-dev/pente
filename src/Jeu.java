@@ -24,8 +24,8 @@ public class Jeu{
 
     public static void main(String[] args){
 
-        GestionnaireImages.setImage("PionBlanc", "PionBlanc.png");
-        GestionnaireImages.setImage("PionNoir", "PionNoir.png");
+        GestionnaireImages.setImage("PionBlanc", "images/PionBlanc.png");
+        GestionnaireImages.setImage("PionNoir", "images/PionNoir.png");
 
     }
 
