@@ -8,12 +8,12 @@ Pour compiler et exécuter:
 
 Distribution des parties du code:
 
-Catez Jeremy :
+Catez Jeremy 10% :
     - Correction de bugs
     - Visualisation du plateau
     - Bonus : Création de l'ia
 
-Doutreluigne Lucas : 
+Doutreluigne Lucas 40% : 
     - Sprint 1 et moitié du Sprint 2
     - Historique des coups
     - Prises diagonales
@@ -23,25 +23,25 @@ Doutreluigne Lucas :
     - Démarrage de partie
     - Prochain pion
 
-Duhamel Quentin :
+Duhamel Quentin 2,5% :
     - Visualisation du plateau
     - Prise de 5 paires
     - Bonus : Création de l'ia
     - Bonus : Prise de 6 paires
 
-Mantez Valentin :
+Mantez Valentin 10% :
     - Création des pions
     - Visualisation du plateau
     - Prise de 5 paires
     - Bonus : Prises de 6 paires
     - Bonus : Création de l'ia
 
-Ogez Etienne :
+Ogez Etienne 15% :
     - Prise de 5 paires
     - Bonus : Prise de 6 paires
     - Bonus : Création de l'ia (principal créateur + a apporté des améliorations)
 
-Prevost Pierre :
+Prevost Pierre 10% :
     - Démarrage de partie
     - Visualisation du plateau
     - Prochain pion
@@ -49,14 +49,14 @@ Prevost Pierre :
     - Historique des coups
     - Bonus : Ecran de démarrage (choix entre joueur contre joueur, joueur contre ia avec niveau de difficultés...)
 
-Proust Alexis :
+Proust Alexis 5% :
     - Prises horizontales et verticales
 
-Pruvost Alban :
+Pruvost Alban 3,75% :
     - Annuler le dernier coup
     - Test de bugs
 
-Rouzier Mathéo :
+Rouzier Mathéo 3,75% :
     - Annuler le dernier coup
     - Test de bugs
 
